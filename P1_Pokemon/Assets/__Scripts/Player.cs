@@ -15,17 +15,17 @@ public enum Pokemon{
 public class Player : MonoBehaviour {
 
 	public static Player S;
-
+	public Pokemon[] pokemon_list;
 	public float 	moveSpeed;
 	public int		tileSize;
-	public Pokemon pokeChoice;
+	//public Pokemon pokeChoice;
 	public	Sprite	upSprite;
 	public	Sprite	downSprite;
 	public	Sprite	leftSprite;
 	public	Sprite	rightSprite;
 	
 	public SpriteRenderer	sprend;
-	
+	public bool ChoosingPokemon = false;
 	public bool		_______;
 	public bool		chosenPokemon = false;
 	public RaycastHit	hitInfo;
@@ -40,6 +40,7 @@ public class Player : MonoBehaviour {
 	
 	void Start(){
 		sprend = gameObject.GetComponent<SpriteRenderer>();
+		pokemon_list = new Pokemon[4];
 	}
 	
 	new public Rigidbody rigidbody{
@@ -85,7 +86,7 @@ public class Player : MonoBehaviour {
 			//min 25
 			//ray cast sends out a ray in any direction for however long 
 			//we want to see if there is an immovable object within 1 tile of dir we face
-			if(Physics.Raycast(GetRay(), out hitInfo, 1f, GetLayerMask(new string[] {"Immovable", "NPC", "Professor_Oak"}))){
+			if(Physics.Raycast(GetRay(), out hitInfo, 1f, GetLayerMask(new string[] {"Immovable", "NPC", "Professor_Oak", "Poke_Ball"}))){
 				moveVec = Vector3.zero;
 				moving = false;
 			};
@@ -102,16 +103,18 @@ public class Player : MonoBehaviour {
 		}
 	}
 	
-	public void CheckForAction(){;
+	public void CheckForAction(){
+		//print(Physics.Raycast(Vector3.up, Vector3.up, 2f, GetLayerMask(new string[] {"Poke_Ball"})));
+		//Debug.DrawRay(Vector3.up, Vector3.up, Color.black, 50, false);
 		if(Physics.Raycast(GetRay(), out hitInfo, 1f, GetLayerMask(new string[] {"Professor_Oak"}))){
 			NPC npc = hitInfo.collider.gameObject.GetComponent<NPC>();
 			npc.FacePlayer(direction);
 			npc.Play_POak_Dialog();
 		}
-		else if(Physics.Raycast(GetRay(), out hitInfo, 3f, GetLayerMask(new string[] {"Poke_Ball"}))){
+		else if(Physics.Raycast(GetRay(), out hitInfo, 2f, GetLayerMask(new string[] {"Poke_Ball"}))){
 			print("poke");
-			if(!Player.S.chosenPokemon){
-				Player.S.chosenPokemon = true;
+			if(!chosenPokemon){
+				chosenPokemon = true;
 				NPC npc = hitInfo.collider.gameObject.GetComponent<NPC>();
 				npc.Play_Choose_Poke();
 			}

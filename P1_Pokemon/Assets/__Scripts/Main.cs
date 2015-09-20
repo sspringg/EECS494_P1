@@ -21,7 +21,11 @@ public class Main : MonoBehaviour {
 	void Update () {
 		if(!inDialog && Input.GetKeyDown(KeyCode.Space)){
 			Menu.S.gameObject.SetActive(true);
-			
+			paused = true;
+		}
+		else if(inDialog && Input.GetKeyDown(KeyCode.Z) && Player.S.ChoosingPokemon){
+			Pokemon_Choose.S.gameObject.SetActive(true);
+			//Dialog.S.HideDialogBox();
 			paused = true;
 		}
 	}

@@ -17,11 +17,10 @@ public class NPC : MonoBehaviour {
 		sprend = gameObject.GetComponent<SpriteRenderer>();
 		POak_Opening_dialog = "Hello, Red! Welcome to my lab. I have a couple pokemon leftover from my training days, "
 		+ "Choose one to get started";
-		POak_dialog = "I study pokemon! You have chosen, " + Player.S.pokeChoice;
-		Choose_Pokemon_Dialog = "Choose your first Pokemon between 	Squirttle, Bulbasaur, Charmander";
+		POak_dialog = "I study pokemon! You have chosen, ";// + Player.S.pokeChoice;
+		Choose_Pokemon_Dialog = "Choose your first Pokemon between 	Squirttle, Bulbasaur, and Charmander";
 	}
 	public void Play_POak_Dialog(){
-		//print(speech);
 		Dialog.S.gameObject.SetActive(true);
 		Color noAlpha = GameObject.Find("DialogBackground").GetComponent<GUITexture>().color;
 		noAlpha.a = 255;
@@ -36,8 +35,9 @@ public class NPC : MonoBehaviour {
 		Dialog.S.gameObject.SetActive(true);
 		Color noAlpha = GameObject.Find("DialogBackground").GetComponent<GUITexture>().color;
 		noAlpha.a = 255;
-		Player.S.chosenPokemon = true;
+		GameObject.Find("DialogBackground").GetComponent<GUITexture>().color = noAlpha;
 		Dialog.S.ShowMessage(Choose_Pokemon_Dialog);
+		Player.S.ChoosingPokemon = true;
 	}
 	public void FacePlayer(Direction playerDir){
 		switch(playerDir){

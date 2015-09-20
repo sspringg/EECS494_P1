@@ -20,11 +20,11 @@ public class Dialog : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		if(Main.S.inDialog && Input.GetKeyDown(KeyCode.X)){
+		if(Main.S.inDialog && Input.GetKeyDown(KeyCode.X) && !Player.S.ChoosingPokemon){
 			HideDialogBox();
 		}
 	}
-	void HideDialogBox(){
+	public void HideDialogBox(){
 		Color noAlpha = GameObject.Find("DialogBackground").GetComponent<GUITexture>().color;
 		noAlpha.a = 0;
 		GameObject.Find("DialogBackground").GetComponent<GUITexture>().color = noAlpha;
