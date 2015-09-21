@@ -45,9 +45,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Gym_Locked.cs" />
      <Compile Include="Assets\__Scripts\CameraFollow.cs" />
      <Compile Include="Assets\__Scripts\Dialog.cs" />
      <Compile Include="Assets\__Scripts\Door.cs" />
+     <Compile Include="Assets\__Scripts\Grass_Shield.cs" />
      <Compile Include="Assets\__Scripts\Main.cs" />
      <Compile Include="Assets\__Scripts\Menu.cs" />
      <Compile Include="Assets\__Scripts\NPC.cs" />
