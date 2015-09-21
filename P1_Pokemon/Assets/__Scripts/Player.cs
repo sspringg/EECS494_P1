@@ -31,6 +31,9 @@ public class Player : MonoBehaviour {
 	public bool		fought_BC = false;
 	public bool		fought_Lass = false;
 	public bool		fought_YS = false;
+	public bool		BC_move = false;
+	public bool		Lass_move = false;
+	public bool		Youngster_move = false;
 	public RaycastHit	hitInfo;
 	public bool		moving = false;
 	public Vector3	targetPos;
@@ -73,6 +76,36 @@ public class Player : MonoBehaviour {
 			if(Input.GetKeyDown(KeyCode.Z)){ //min 40
 				CheckForAction();
 			}
+			//these actions need to come before arrows become they need to happen even if trying to move 
+			else if(Physics.Raycast(gameObject.transform.position, Vector3.left, out hitInfo, 6f, GetLayerMask(new string[] {"Bug_Catcher"})) && !fought_BC){
+				fought_BC = true;
+				NPC npc = hitInfo.collider.gameObject.GetComponent<NPC>();
+				npc.Play_Dialog("Not so fast Rookie! It's time to teach you a lesson");
+				moving = false;
+				direction = Direction.left;
+				sprend.sprite = leftSprite;
+				BC_move = true;		
+				
+			}
+			else if(Physics.Raycast(gameObject.transform.position, Vector3.right, out hitInfo, 10f, GetLayerMask(new string[] {"Lass"})) && !fought_Lass){
+				fought_Lass = true;
+				NPC npc = hitInfo.collider.gameObject.GetComponent<NPC>();
+				npc.Play_Dialog("You may have beaten Bug Catcher but you will be no match for me");
+				moving = false;
+				direction = Direction.right;
+				sprend.sprite = rightSprite;
+				Lass_move = true;		
+				
+			}
+			else if(Physics.Raycast(gameObject.transform.position, Vector3.left, out hitInfo, 8f, GetLayerMask(new string[] {"Youngster"})) && !fought_YS){
+				fought_YS = true;
+				NPC npc = hitInfo.collider.gameObject.GetComponent<NPC>();
+				npc.Play_Dialog("Impressive I must say. Now it is time for me to teach you what being a Pokemon trainer is really about");
+				moving = false;
+				direction = Direction.left;
+				sprend.sprite = leftSprite;
+				Youngster_move = true;
+			}
 			if(Input.GetKey(KeyCode.RightArrow)){
 				moveVec = Vector3.right;
 				direction = Direction.right;
@@ -97,23 +130,42 @@ public class Player : MonoBehaviour {
 				sprend.sprite = downSprite;
 				moving = true;
 			}
-			else if(Physics.Raycast(GetRay(), out hitInfo, 5f, GetLayerMask(new string[] {"Bug_Catcher"})) && !fought_BC){
-				print("Bug_Catcher");
-				fought_BC = true;
-				NPC npc = hitInfo.collider.gameObject.GetComponent<NPC>();
-				npc.Play_Dialog("Bug_Catcher");
+			else if(BC_move){
+				if((transform.position.x - 64f) > .1){
+					sprend.sprite = leftSprite;
+					transform.position += Vector3.left * (Time.deltaTime * 4);
+				}
+				else{
+					direction = Direction.down;
+					sprend.sprite = downSprite;
+					BC_move = false;
+					//call fight scene here
+				}
 			}
-			else if(Physics.Raycast(GetRay(), out hitInfo, 5f, GetLayerMask(new string[] {"Lass"})) && !fought_Lass){
-				print("Lass");
-				fought_Lass = true;
-				NPC npc = hitInfo.collider.gameObject.GetComponent<NPC>();
-				npc.Play_Dialog("Lass");
+			else if(Lass_move){
+//				print("lass: " + (transform.position.x - 70f));
+				if((70f - transform.position.x) > .1){
+					sprend.sprite = rightSprite;
+					transform.position += Vector3.right * (Time.deltaTime * 4);
+				}
+				else{
+					direction = Direction.down;
+					sprend.sprite = downSprite;
+					Lass_move = false;
+					//call new scene here
+				}
 			}
-			else if(Physics.Raycast(GetRay(), out hitInfo, 3f, GetLayerMask(new string[] {"Youngster"})) && !fought_YS){
-				print("Youngster");
-				fought_YS = true;
-				NPC npc = hitInfo.collider.gameObject.GetComponent<NPC>();
-				npc.Play_Dialog("Youngster");
+			else if(Youngster_move){
+				if((transform.position.x - 68f) > .1){
+					sprend.sprite = leftSprite;
+					transform.position += Vector3.left * (Time.deltaTime * 4);
+				}
+				else{
+					direction = Direction.down;
+					sprend.sprite = downSprite;
+					Youngster_move = false;
+					//call fight scene here
+				}
 			}
 			else{
 				moveVec = Vector3.zero;

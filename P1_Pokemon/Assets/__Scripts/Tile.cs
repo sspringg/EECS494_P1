@@ -124,7 +124,7 @@ public class Tile : MonoBehaviour {
 			break;
 		case TileType.ledge: 
 			//bc.gameObject.tag = "Ledge";
-			bc.gameObject.layer = LayerMask.NameToLayer("Ledge");
+			bc.gameObject.layer = LayerMask.NameToLayer("Immovable");
 			break;
 		case TileType.open: 
 			//bc.gameObject.tag = "Untagged";
