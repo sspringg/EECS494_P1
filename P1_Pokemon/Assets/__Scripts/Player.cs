@@ -10,12 +10,13 @@ public enum Direction{
 public enum Pokemon{
 	Squirttle,
 	Bulbasaur,
-	Charmander
+	Charmander,
+	Pikachu
 }
 public class Player : MonoBehaviour {
 
 	public static Player S;
-	public Pokemon[] pokemon_list;
+	public PokemonObject[] pokemon_list;
 	public float 	moveSpeed;
 	public int		tileSize;
 	//public Pokemon pokeChoice;
@@ -53,10 +54,10 @@ public class Player : MonoBehaviour {
 	
 	void Start(){
 		sprend = gameObject.GetComponent<SpriteRenderer>();
-		pokemon_list = new Pokemon[4];
+		pokemon_list = new PokemonObject[4];
 		POak_Opening_dialog = "Hello, Red! Welcome to my lab. I have a couple pokemon leftover from my training days, "
 			+ "Choose one to get started";
-		POak_dialog = "I study pokemon! You have chosen, " + Player.S.pokemon_list[0]; // + Player.S.pokeChoice;
+		POak_dialog = "I study pokemon! You have chosen, "; // + Player.S.pokeChoice;
 		Choose_Pokemon_Dialog = "Choose your first Pokemon between 	Squirttle, Bulbasaur, and Charmander";
 		Couch_Potatoe_Dialog = "Pokemon centers heal your tired, hurt, or fainted Pokemon!";
 		Store_Clerk = "Say hi to Professor Oak for me!";
@@ -139,7 +140,7 @@ public class Player : MonoBehaviour {
 					direction = Direction.down;
 					sprend.sprite = downSprite;
 					BC_move = false;
-					Application.LoadLevel("_Scene_2");
+					Application.LoadLevelAdditive("_Scene_2");
 				}
 			}
 			else if(Lass_move){
@@ -152,7 +153,7 @@ public class Player : MonoBehaviour {
 					direction = Direction.down;
 					sprend.sprite = downSprite;
 					Lass_move = false;
-					//call new scene here
+					Application.LoadLevelAdditive("_Scene_2");
 				}
 			}
 			else if(Youngster_move){
@@ -164,7 +165,7 @@ public class Player : MonoBehaviour {
 					direction = Direction.down;
 					sprend.sprite = downSprite;
 					Youngster_move = false;
-					//call fight scene here
+					Application.LoadLevelAdditive("_Scene_2");
 				}
 			}
 			else{

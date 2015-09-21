@@ -29,6 +29,14 @@ public class AttackMove{
 			atkmv.curPp = 35;
 			atkmv.type = pkmnType.normal;
 			break;
+		case "Thunder Shock":
+			atkmv.moveName = "Thunder Shock";
+			atkmv.pwr = 40;
+			atkmv.acurcy = 100;
+			atkmv.totPp = 30;
+			atkmv.curPp = 30;
+			atkmv.type = pkmnType.electric;
+			break;
 		default:
 			atkmv.moveName = "None";
 			atkmv.pwr = 0;

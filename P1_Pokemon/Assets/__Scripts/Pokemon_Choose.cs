@@ -45,16 +45,17 @@ public class Pokemon_Choose : MonoBehaviour {
 				switch(activeItem){ // at 1:14:00
 				case(int)Poke_list.Charmander:
 					print("char");
-					Player.S.pokemon_list[0] = (Pokemon)Poke_list.Charmander;
+					Player.S.pokemon_list[0] = PokemonObject.getPokemon("Charmander");
 					break;
 				case(int)Poke_list.Bulbasaur:
-					Player.S.pokemon_list[0] = (Pokemon)Poke_list.Bulbasaur;
+					Player.S.pokemon_list[0] = PokemonObject.getPokemon("Bulbasaur");
 					break;
 				case(int)Poke_list.Squirttle:
-					Player.S.pokemon_list[0] = (Pokemon)Poke_list.Squirttle;
+					Player.S.pokemon_list[0] = PokemonObject.getPokemon("Squirtle");
 					print("squir");
 					break;	
 				}
+				Player.S.pokemon_list[1] = PokemonObject.getPokemon("Pikachu");
 				gameObject.SetActive(false);
 				Main.S.paused = false;
 				print(Player.S.pokemon_list[0]);
