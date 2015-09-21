@@ -46,6 +46,11 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Gym_Locked.cs" />
+     <Compile Include="Assets\__Scripts\AttackMenu.cs" />
+     <Compile Include="Assets\__Scripts\AttackMove.cs" />
+     <Compile Include="Assets\__Scripts\AttackMoveView.cs" />
+     <Compile Include="Assets\__Scripts\BattleScreen.cs" />
+     <Compile Include="Assets\__Scripts\BottomMenu.cs" />
      <Compile Include="Assets\__Scripts\CameraFollow.cs" />
      <Compile Include="Assets\__Scripts\Dialog.cs" />
      <Compile Include="Assets\__Scripts\Door.cs" />
@@ -54,6 +59,7 @@
      <Compile Include="Assets\__Scripts\Menu.cs" />
      <Compile Include="Assets\__Scripts\NPC.cs" />
      <Compile Include="Assets\__Scripts\Player.cs" />
+     <Compile Include="Assets\__Scripts\PokemonObject.cs" />
      <Compile Include="Assets\__Scripts\Pokemon_Choose.cs" />
      <Compile Include="Assets\__Scripts\ShowMapOnCamera.cs" />
      <Compile Include="Assets\__Scripts\Tile.cs" />

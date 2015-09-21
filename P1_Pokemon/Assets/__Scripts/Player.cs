@@ -139,7 +139,7 @@ public class Player : MonoBehaviour {
 					direction = Direction.down;
 					sprend.sprite = downSprite;
 					BC_move = false;
-					//call fight scene here
+					Application.LoadLevel("_Scene_2");
 				}
 			}
 			else if(Lass_move){
