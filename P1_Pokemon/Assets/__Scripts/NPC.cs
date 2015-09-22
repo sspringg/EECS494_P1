@@ -99,21 +99,27 @@ public class NPC : MonoBehaviour {
 					Player.S.playerSpeaking = null;
 					return "Choose one from the table to get started.";
 				case 2:
-					Player.S.playerSpeaking = null;
-					return "Hi Red! What are you doing here? Don't forget your mission!";
+					Player.S.speakDictionary["Professor_Oak"] = 3;
+					return "";
 				case 3:
 					Player.S.playerSpeaking = null;
-					Player.S.speakDictionary["Professor_Oak"] = 4;
-					return "AHH, my super POKeBALL! Thank you!";
+					return "Hi Red! What are you doing here? Don't forget your mission!";
 				case 4:
-					Player.S.playerSpeaking = null;
 					Player.S.speakDictionary["Professor_Oak"] = 5;
-					return "While you are here, look over on that table";
+					return "";
 				case 5:
 					Player.S.playerSpeaking = null;
 					Player.S.speakDictionary["Professor_Oak"] = 6;
-					return "It's new technology called a POKeDEX. My dream was to study every POKeMON in the  world but I got to old!";
+					return "AHH, my super POKeBALL! Thank you!";
 				case 6:
+					Player.S.playerSpeaking = null;
+					Player.S.speakDictionary["Professor_Oak"] = 7;
+					return "While you are here, look over on that table";
+				case 7:
+					Player.S.playerSpeaking = null;
+					Player.S.speakDictionary["Professor_Oak"] = 8;
+					return "It's new technology called a POKeDEX. My dream was to study every POKeMON in the  world but I got to old!";
+				case 8:
 					Player.S.playerSpeaking = null;
 					Player.S.speakDictionary["Professor_Oak"] = 2;
 					return "I want you to do it for me. It would be a great feat in the POKeMON world";
@@ -133,7 +139,11 @@ public class NPC : MonoBehaviour {
 					Player.S.ChoosingPokemon = true;
 					return "Choose your first Pokemon between Squirttle, Bulbasaur, and Charmander";
 				case 1:
-				Player.S.playerSpeaking = null;
+					Player.S.speakDictionary["Pokemon_Choose_Table"] = 2;
+					return "";
+				case 2:
+					Player.S.playerSpeaking = null;
+					Player.S.speakDictionary["Pokemon_Choose_Table"] = 1;
 					return "There are plenty of POKeMON to go catch in the wild";
 			}
 		}
@@ -244,23 +254,26 @@ public class NPC : MonoBehaviour {
 					Player.S.itemsDictionary.Add("Prof_Oak_Package",0);
 					return "Wiat a second! I recognize you. You're Professor Oaks new prodigy. Here is a package, can you take it to him?";
 				case 3:
+					Player.S.speakDictionary["Checkout_Front"] = 4;
+					return "";
+				case 4:
 					Player.S.playerSpeaking = null;
 					Player.S.Mart_Options = true;
 					return "We have plenty of great stuff in stock today! What would you like?";
-				case 4:
-					Player.S.speakDictionary["Checkout_Front"] = 8;
-					return "Pokeball, great choice! Good luck and be careful with it";
 				case 5:
-					Player.S.speakDictionary["Checkout_Front"] = 8;
-					return "That's the best Antidote money can buy!";
+					Player.S.speakDictionary["Checkout_Front"] = 9;
+					return "Pokeball, great choice! Good luck and be careful with it";
 				case 6:
-					Player.S.speakDictionary["Checkout_Front"] = 8;
-					return "This will get your POKeMON feeling better in no time!";
+					Player.S.speakDictionary["Checkout_Front"] = 9;
+					return "That's the best Antidote money can buy!";
 				case 7:
+					Player.S.speakDictionary["Checkout_Front"] = 9;
+					return "This will get your POKeMON feeling better in no time!";
+				case 8:
 					Player.S.speakDictionary["Checkout_Front"] = 3;
 					Player.S.playerSpeaking = null;
 					return "You don't have enough money to buy that. You can earn money by winning POKeMON battles.";
-				case 8:
+				case 9:
 					Player.S.speakDictionary["Checkout_Front"] = 3;
 					Player.S.playerSpeaking = null;
 					return "Thank you for your business, have a great day!";
@@ -293,7 +306,7 @@ public class NPC : MonoBehaviour {
 					Player.S.speakDictionary["Forward_Clerk"] = 6;
 					return "Thank you! Your POKeMoN are fighting fit!";
 				case 6:
-					Player.S.speakDictionary["Forward_Clerk"] = 0;
+					Player.S.speakDictionary["Forward_Clerk"] = -1;
 					Player.S.playerSpeaking = null;
 					return "We hope to see you again!";	
 			}
@@ -310,7 +323,7 @@ public class NPC : MonoBehaviour {
 					Player.S.speakDictionary["Field_NPC"] = 2;
 					return "It's a bit scary but you can jump from them";
 				case 2:
-					Player.S.speakDictionary["Field_NPC"] = 0;
+					Player.S.speakDictionary["Field_NPC"] = -1;
 					Player.S.playerSpeaking = null;
 					return "You can get back to PALLET TOWN quikcer that way";
 			}	
@@ -325,12 +338,15 @@ public class NPC : MonoBehaviour {
 					Player.S.playerSpeaking = null;
 					return "Mom: It's time to go out and explore the world";
 				case 1:
+					Player.S.speakDictionary["Mom"] = 0;
+					return "";
+				case 2:
 					Player.S.speakDictionary["Mom"] = 2;
 					return "Red, you should take a quick rest";
-				case 2:
+				case 3:
 					Player.S.speakDictionary["Mom"] = 3;
 					return "...";
-				case 3:
+				case 4:
 					Player.S.speakDictionary["Mom"] = 1;
 					for(int i = 0; i < Player.S.pokemon_list.Length; ++i){
 						PokemonObject po = Player.S.pokemon_list[i];

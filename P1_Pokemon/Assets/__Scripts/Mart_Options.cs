@@ -43,44 +43,44 @@ public class Mart_Options : MonoBehaviour {
 						if(Player.S.money >= 200){
 							Player.S.money -= 200;
 							addPlayerItem("Pokeball");
-							Player.S.speakDictionary["Checkout_Front"] = 4;
+							Player.S.speakDictionary["Checkout_Front"] = 5;
 						}
 						else
-							Player.S.speakDictionary["Checkout_Front"] = 7;
+							Player.S.speakDictionary["Checkout_Front"] = 8;
 						Player.S.Mart_Options = false;
 						break;
 					case(int)Item_list.Antidote:
 						if(Player.S.money >= 100){
 							Player.S.money -= 100;
 							addPlayerItem("Antidote");
-							Player.S.speakDictionary["Checkout_Front"] = 5;
+							Player.S.speakDictionary["Checkout_Front"] = 6;
 						}
 						else
-							Player.S.speakDictionary["Checkout_Front"] = 7;
+							Player.S.speakDictionary["Checkout_Front"] = 8;
 						Player.S.Mart_Options = false;
 						break;
 					case(int)Item_list.Palyz_Heal:
 						if(Player.S.money >= 200){
 							Player.S.money -= 200;
 							addPlayerItem("Parlyz_Heal");
-							Player.S.speakDictionary["Checkout_Front"] = 6;
+							Player.S.speakDictionary["Checkout_Front"] = 7;
 						}
 						else
-							Player.S.speakDictionary["Checkout_Front"] = 7;
+							Player.S.speakDictionary["Checkout_Front"] = 8;
 						Player.S.Mart_Options = false;
 						break;
 					case (int)Item_list.Burn_Heal:
 						if(Player.S.money >= 250){
 							Player.S.money -= 250;
 							addPlayerItem("Burn_Heal");
-							Player.S.speakDictionary["Checkout_Front"] = 6;
+							Player.S.speakDictionary["Checkout_Front"] = 7;
 						}
 						else
 							Player.S.speakDictionary["Checkout_Front"] = 7;
 						Player.S.Mart_Options = false;
 						break;
 					case -1:
-						Player.S.speakDictionary["Checkout_Front"] = 8;
+						Player.S.speakDictionary["Checkout_Front"] = 9;
 						Player.S.Mart_Options = false;
 						break;
 				}
