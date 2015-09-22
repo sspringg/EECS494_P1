@@ -2,21 +2,17 @@
 using System.Collections;
 
 public class Grass_Shield : MonoBehaviour {
-	private string get_Pokemon_Message;
 	// Use this for initialization
-	void Start () {
-		get_Pokemon_Message = "See Professor Oak in his lab before you enter the long grass. Dangerous Pokemon live in there";
-	}
-	
 	void OnTriggerEnter(Collider coll){
-		if(Player.S.chosenPokemon)
+		if(Player.S.ChosenPokemon)
 			gameObject.SetActive(false);
 		else{
+			print("active" + Player.S.ChosenPokemon);
 			Dialog.S.gameObject.SetActive(true);
 			Color noAlpha = GameObject.Find("DialogBackground").GetComponent<GUITexture>().color;
 			noAlpha.a = 255;
 			GameObject.Find("DialogBackground").GetComponent<GUITexture>().color = noAlpha;
-			Dialog.S.ShowMessage(get_Pokemon_Message);
+			Dialog.S.ShowMessage( "See Professor Oak in his lab before you enter the long grass. Dangerous Pokemon live in there");
 		}
 	}
 }

@@ -13,15 +13,17 @@ public class Dialog : MonoBehaviour {
 		HideDialogBox();
 	}
 	public void ShowMessage(string message){
-		Main.S.inDialog = true;
 		GameObject dialogBox = transform.Find("Text").gameObject;
 		Text goText = dialogBox.GetComponent<Text>();
 		goText.text = message;
+		Main.S.inDialog = true;
 	}
 	// Update is called once per frame
 	void Update () {
-		if(Main.S.inDialog && Input.GetKeyDown(KeyCode.X) && !Player.S.ChoosingPokemon){
+		if(Main.S.inDialog && Input.GetKeyDown(KeyCode.Z)){
 			HideDialogBox();
+			if(Player.S.playerSpeaking != null)
+				Player.S.CheckForAction();
 		}
 	}
 	public void HideDialogBox(){

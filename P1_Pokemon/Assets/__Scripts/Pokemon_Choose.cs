@@ -41,16 +41,16 @@ public class Pokemon_Choose : MonoBehaviour {
 	void Update () {
 		if (Main.S.paused){
 			if(Input.GetKeyDown(KeyCode.Return)){
-				Player.S.chosenPokemon = true;
+				print(activeItem);
 				switch(activeItem){ // at 1:14:00
-				case(int)Poke_list.Charmander:
+				case 0:
 					print("char");
 					Player.S.pokemon_list[0] = PokemonObject.getPokemon("Charmander");
 					break;
-				case(int)Poke_list.Bulbasaur:
+				case 1:
 					Player.S.pokemon_list[0] = PokemonObject.getPokemon("Bulbasaur");
 					break;
-				case(int)Poke_list.Squirttle:
+				case 2:
 					Player.S.pokemon_list[0] = PokemonObject.getPokemon("Squirtle");
 					print("squir");
 					break;	
@@ -60,6 +60,7 @@ public class Pokemon_Choose : MonoBehaviour {
 				Main.S.paused = false;
 				print(Player.S.pokemon_list[0]);
 				Dialog.S.HideDialogBox();
+				Player.S.ChosenPokemon = true;
 				Player.S.ChoosingPokemon = false;
 				Color noAlpha = GameObject.Find("Oak_Lab/Pokeball").GetComponent<SpriteRenderer>().color;
 				noAlpha.a = 0;
