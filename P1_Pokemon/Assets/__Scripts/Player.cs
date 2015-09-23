@@ -12,7 +12,8 @@ public enum Pokemon{
 	Squirttle,
 	Bulbasaur,
 	Charmander,
-	Pikachu
+	Pikachu,
+	none
 }
 public class Player : MonoBehaviour {
 
@@ -58,7 +59,13 @@ public class Player : MonoBehaviour {
 	
 	void Start(){
 		sprend = gameObject.GetComponent<SpriteRenderer>();
-		pokemon_list = new PokemonObject[4];
+		pokemon_list = new PokemonObject[6];
+		pokemon_list [0] = PokemonObject.getPokemon ("None");
+		pokemon_list [1] = PokemonObject.getPokemon ("None");
+		pokemon_list [2] = PokemonObject.getPokemon ("None");
+		pokemon_list [3] = PokemonObject.getPokemon ("None");
+		pokemon_list [4] = PokemonObject.getPokemon ("None");
+		pokemon_list [5] = PokemonObject.getPokemon ("None");
 	}
 	
 	new public Rigidbody rigidbody{
