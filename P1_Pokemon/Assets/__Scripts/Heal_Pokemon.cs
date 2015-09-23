@@ -51,8 +51,12 @@ public class Heal_Pokemon : MonoBehaviour {
 				Main.S.paused = false;
 				for(int i = 0; i < Player.S.pokemon_list.Length; ++i){
 					PokemonObject po = Player.S.pokemon_list[i];
-					if (po == null) continue;
+					if (po.pkmnName == "None") continue;
 					Player.S.pokemon_list[i].curHp = Player.S.pokemon_list[i].totHp;
+					Player.S.pokemon_list[i].move1.curPp = Player.S.pokemon_list[i].move1.totPp;
+					Player.S.pokemon_list[i].move2.curPp = Player.S.pokemon_list[i].move2.totPp;
+					Player.S.pokemon_list[i].move3.curPp = Player.S.pokemon_list[i].move3.totPp;
+					Player.S.pokemon_list[i].move4.curPp = Player.S.pokemon_list[i].move4.totPp;
 				}
 				
 				Player.S.CheckForAction();

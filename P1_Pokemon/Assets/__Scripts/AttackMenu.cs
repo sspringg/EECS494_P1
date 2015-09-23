@@ -16,6 +16,7 @@ public class AttackMenu : MonoBehaviour {
 	
 	public int activeItem;
 	public List<GameObject> menuItems;
+	public string msg;
 	
 	void Awake(){
 		S = this;
@@ -41,49 +42,109 @@ public class AttackMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		AttackMoveView.updateMoveView(activeItem, BattleScreen.S.playerPokemon);
-		PokemonObject playerPkmn = BattleScreen.S.playerPokemon;
-		PokemonObject oppoPkmn = BattleScreen.S.opponentPokemon;
-		if(Input.GetKeyDown(KeyCode.Return)){
+		AttackMoveView.updateMoveView(activeItem, BattleScreen.playerPokemon);
+		PokemonObject playerPkmn = BattleScreen.playerPokemon;
+		PokemonObject oppoPkmn = BattleScreen.opponentPokemon;
+		if(Input.GetKeyDown(KeyCode.A)){
 			switch(activeItem){
 			case(int)aMenuItem.move1:
 				print("Move1 selected");
-				if (playerPkmn.speed >= oppoPkmn.speed){
-					oppoPkmn.takeHit(playerPkmn.move1, playerPkmn);
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
+				if (playerPkmn.move1.moveName == "None" || playerPkmn.move1.curPp <= 0){
+					print ("this move isn't available");
+				}
+				else if (playerPkmn.speed >= oppoPkmn.speed){
+					oppoPkmn.takeHit(playerPkmn.move1, playerPkmn, false);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true); 
+					msg = playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move1.moveName + '\n'+ '\n';
+					msg += oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				} else{
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
-					oppoPkmn.takeHit(playerPkmn.move1, playerPkmn);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true);
+					oppoPkmn.takeHit(playerPkmn.move1, playerPkmn, false);
+					msg = oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName + '\n'+ '\n';
+					msg += playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move1.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				}
 				break;
 			case(int)aMenuItem.move2:
 				print("Move2 selected");
-				if (playerPkmn.speed >= oppoPkmn.speed){
-					oppoPkmn.takeHit(playerPkmn.move2, playerPkmn);
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
+				if (playerPkmn.move2.moveName == "None" || playerPkmn.move1.curPp <= 0){
+					print ("this move isn't available");
+				}
+				else if (playerPkmn.speed >= oppoPkmn.speed){
+					oppoPkmn.takeHit(playerPkmn.move2, playerPkmn, false);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true);
+					msg = playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move2.moveName + '\n'+ '\n';
+					msg += oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				} else{
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
-					oppoPkmn.takeHit(playerPkmn.move2, playerPkmn);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true);
+					oppoPkmn.takeHit(playerPkmn.move2, playerPkmn, false);
+					msg = oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName + '\n'+ '\n';
+					msg += playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move2.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				}
 				break;
 			case(int)aMenuItem.move3:
 				print("Move3 selected");
-				if (playerPkmn.speed >= oppoPkmn.speed){
-					oppoPkmn.takeHit(playerPkmn.move3, playerPkmn);
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
+				if (playerPkmn.move3.moveName == "None" || playerPkmn.move1.curPp <= 0){
+					print ("this move isn't available");
+				}
+				else if (playerPkmn.speed >= oppoPkmn.speed){
+					oppoPkmn.takeHit(playerPkmn.move3, playerPkmn, false);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true);
+					msg = playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move3.moveName + '\n'+ '\n';
+					msg += oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				} else{
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
-					oppoPkmn.takeHit(playerPkmn.move3, playerPkmn);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true);
+					oppoPkmn.takeHit(playerPkmn.move3, playerPkmn, false);
+					msg = oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName + '\n'+ '\n';
+					msg += playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move3.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				}
 				break;
 			case(int)aMenuItem.move4:
 				print("Move4 selected");
-				if (playerPkmn.speed >= oppoPkmn.speed){
-					oppoPkmn.takeHit(playerPkmn.move4, playerPkmn);
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
+				if (playerPkmn.move4.moveName == "None" || playerPkmn.move1.curPp <= 0){
+					print ("this move isn't available");
+				}
+				else if (playerPkmn.speed >= oppoPkmn.speed){
+					oppoPkmn.takeHit(playerPkmn.move4, playerPkmn, false);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true);
+					msg = playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move4.moveName + '\n'+ '\n';
+					msg += oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				} else{
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
-					oppoPkmn.takeHit(playerPkmn.move4, playerPkmn);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true);
+					oppoPkmn.takeHit(playerPkmn.move4, playerPkmn, false);
+					msg = oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName + '\n'+ '\n';
+					msg += playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move4.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				}
 				break;
 			}
@@ -93,6 +154,12 @@ public class AttackMenu : MonoBehaviour {
 		}
 		else if (Input.GetKeyDown(KeyCode.UpArrow)){
 			MoveUpMenu();
+		}
+		else if (Input.GetKeyDown(KeyCode.S))
+		{
+			gameObject.SetActive(false);
+			AttackMoveView.S.gameObject.SetActive(false);
+			BottomMenu.S.gameObject.SetActive(true);
 		}
 	}
 	public void MoveDownMenu(){
@@ -104,5 +171,18 @@ public class AttackMenu : MonoBehaviour {
 		menuItems[activeItem].GetComponent<GUIText>().color = Color.black;
 		activeItem = activeItem == 0 ? menuItems.Count - 1: --activeItem;
 		menuItems[activeItem].GetComponent<GUIText>().color = Color.red;	
+	}
+
+	public static void updateMoves(PokemonObject curPkmn){
+		GUIText myText;
+
+		myText = GameObject.Find ("Move1").GetComponent<GUIText>();
+		myText.text = curPkmn.move1.moveName;
+		myText = GameObject.Find ("Move2").GetComponent<GUIText>();
+		myText.text = curPkmn.move2.moveName;
+		myText = GameObject.Find ("Move3").GetComponent<GUIText>();
+		myText.text = curPkmn.move3.moveName;
+		myText = GameObject.Find ("Move4").GetComponent<GUIText>();
+		myText.text = curPkmn.move4.moveName;
 	}
 }

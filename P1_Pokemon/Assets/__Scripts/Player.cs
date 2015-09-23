@@ -12,13 +12,20 @@ public enum Pokemon{
 	Squirttle,
 	Bulbasaur,
 	Charmander,
-	Pikachu
+	Pikachu,
+	none
 }
 public class Player : MonoBehaviour {
 
 //initilizing variable
 	public static Player S;
 	public PokemonObject[] pokemon_list;
+	public PokemonObject BC_pkmn;
+	public PokemonObject Lass_pkmn;
+	public PokemonObject YS_pkmn;
+	public PokemonObject wildPkmn1;
+	public PokemonObject wildPkmn2;
+	public int enemyNo;
 	public float 	moveSpeed;
 	public int		tileSize;
 	
@@ -56,7 +63,28 @@ public class Player : MonoBehaviour {
 	
 	void Start(){
 		sprend = gameObject.GetComponent<SpriteRenderer>();
-		pokemon_list = new PokemonObject[4];
+		pokemon_list = new PokemonObject[6];
+		pokemon_list [0] = PokemonObject.getPokemon ("None");
+		pokemon_list [1] = PokemonObject.getPokemon ("None");
+		pokemon_list [2] = PokemonObject.getPokemon ("None");
+		pokemon_list [3] = PokemonObject.getPokemon ("None");
+		pokemon_list [4] = PokemonObject.getPokemon ("None");
+		pokemon_list [5] = PokemonObject.getPokemon ("None");
+		BC_pkmn = PokemonObject.getPokemon ("Caterpie");
+		Lass_pkmn = PokemonObject.getPokemon ("Squirtle");
+		Lass_pkmn.level = 3;
+		Lass_pkmn.totHp -= 10;
+		Lass_pkmn.curHp -= 10;
+		Lass_pkmn.atk -= 10;
+		Lass_pkmn.def -= 10;
+		YS_pkmn = PokemonObject.getPokemon ("Bulbasaur");
+		YS_pkmn.level = 3;
+		YS_pkmn.totHp -= 10;
+		YS_pkmn.curHp -= 10;
+		YS_pkmn.atk -= 10;
+		YS_pkmn.def -= 10;
+		wildPkmn1 = PokemonObject.getPokemon ("Caterpie");
+		wildPkmn2 = PokemonObject.getPokemon ("Caterpie");
 	}
 	
 	new public Rigidbody rigidbody{
@@ -94,8 +122,7 @@ public class Player : MonoBehaviour {
 				moving = false;
 				npc.moveTowardPlayer = true;
 				npc.Play_Dialog("Youngster");
-			}	
-////////////////////////////////////
+			}
 //ARROW KEYS		
 			if(Input.GetKey(KeyCode.RightArrow)){
 				moveVec = Vector3.right;

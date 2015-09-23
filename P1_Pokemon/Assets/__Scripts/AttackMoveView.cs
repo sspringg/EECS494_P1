@@ -20,19 +20,6 @@ public class AttackMoveView : MonoBehaviour {
 	
 	}
 
-	public static void updateMoves(PokemonObject curPkmn){
-		GUIText myText;
-		
-		myText = GameObject.Find ("Move1").GetComponent<GUIText>();
-		myText.text = curPkmn.move1.moveName;
-		myText = GameObject.Find ("Move2").GetComponent<GUIText>();
-		myText.text = curPkmn.move2.moveName;
-		myText = GameObject.Find ("Move3").GetComponent<GUIText>();
-		myText.text = curPkmn.move3.moveName;
-		myText = GameObject.Find ("Move4").GetComponent<GUIText>();
-		myText.text = curPkmn.move4.moveName;
-	}
-
 	public static void updateMoveView(int moveNum, PokemonObject curPkmn){
 		GUIText myText1;
 		GUIText myText2;

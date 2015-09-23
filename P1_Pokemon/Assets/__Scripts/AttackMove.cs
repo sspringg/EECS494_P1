@@ -37,6 +37,14 @@ public class AttackMove{
 			atkmv.curPp = 30;
 			atkmv.type = pkmnType.electric;
 			break;
+		case "Bug Bite":
+			atkmv.moveName = "Bug Bite";
+			atkmv.pwr = 60;
+			atkmv.acurcy = 100;
+			atkmv.totPp = 20;
+			atkmv.curPp = 20;
+			atkmv.type = pkmnType.bug;
+			break;
 		default:
 			atkmv.moveName = "None";
 			atkmv.pwr = 0;

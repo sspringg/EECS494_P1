@@ -110,7 +110,7 @@ public class NPC : MonoBehaviour {
 				else if(Player.S.transform.position.y > gameObject.transform.position.y)
 					Player.S.sprend.sprite = Player.S.downSprite;
 			}
-			//Application.LoadLevelAdditive("_Scene_2");
+			Application.LoadLevelAdditive("_Scene_2");
 		}
 	}
 	private string TalkTo(string playerName) {

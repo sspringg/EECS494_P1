@@ -4,8 +4,8 @@ using System.Collections;
 public class BattleScreen : MonoBehaviour {
 
 	public static BattleScreen S;
-	public PokemonObject playerPokemon;
-	public PokemonObject opponentPokemon;
+	public static PokemonObject playerPokemon;
+	public static PokemonObject opponentPokemon;
 
 	void Awake(){
 		S = this;
@@ -13,38 +13,42 @@ public class BattleScreen : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		playerPokemon = Player.S.pokemon_list [0];
-		opponentPokemon = PokemonObject.getPokemon ("Bulbasaur");      //= getOpponentPokemon ();
-		
-		updatePokemon (true, playerPokemon);
-		updatePokemon (false, opponentPokemon);
-
+		for (int i = 0; i < 6; ++i) {
+			if (Player.S.pokemon_list[i].curHp > 0){
+				updatePokemon (true, Player.S.pokemon_list[i]);
+				break;
+			}
+		}
+		switch (Player.S.enemyNo) {
+		case 1:
+			updatePokemon (false, Player.S.BC_pkmn);
+			break;
+		case 2:
+			updatePokemon (false, Player.S.Lass_pkmn);
+			break;
+		case 3:
+			updatePokemon (false, Player.S.YS_pkmn);
+			break;
+		default:
+			updatePokemon (false, PokemonObject.getPokemon ("Charmander"));
+			break;
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (playerPokemon.curHp <= 0 || opponentPokemon.curHp <= 0) {
-			Destroy(GameObject.Find("BattleScene"));
-		}
 		GUIText myText;
 		myText = GameObject.Find ("HPVal1").GetComponent<GUIText> ();
 		myText.text = playerPokemon.curHp.ToString () + '/' + playerPokemon.totHp.ToString();
 		myText = GameObject.Find ("HPVal2").GetComponent<GUIText>();
 		myText.text = opponentPokemon.curHp.ToString () + '/' + opponentPokemon.totHp.ToString();
-	
-	}
-
-	void startBattle(){
-		playerPokemon = Player.S.pokemon_list [0];
-		opponentPokemon = PokemonObject.getPokemon ("Bulbasaur");      //= getOpponentPokemon ();
-		
-		updatePokemon (true, playerPokemon);
-		updatePokemon (false, opponentPokemon);
 	}
 
 	public static void updatePokemon (bool isPlayer, PokemonObject curPkmn){
 		GUIText myText;
 		if (isPlayer) {
+			BattleScreen.playerPokemon = curPkmn;
+			curPkmn.fought = true;
 			myText = GameObject.Find ("NameVal1").GetComponent<GUIText> ();
 			myText.text = curPkmn.pkmnName;
 			
@@ -53,8 +57,8 @@ public class BattleScreen : MonoBehaviour {
 			
 			myText = GameObject.Find ("HPVal1").GetComponent<GUIText> ();
 			myText.text = curPkmn.curHp.ToString () + '/' + curPkmn.totHp.ToString();
-			AttackMoveView.updateMoves(curPkmn);
 		} else {
+			BattleScreen.opponentPokemon = curPkmn;
 			myText = GameObject.Find ("NameVal2").GetComponent<GUIText>();
 			myText.text = curPkmn.pkmnName;
 			
@@ -64,5 +68,9 @@ public class BattleScreen : MonoBehaviour {
 			myText = GameObject.Find ("HPVal2").GetComponent<GUIText>();
 			myText.text = curPkmn.curHp.ToString () + '/' + curPkmn.totHp.ToString();
 		}
+	}
+
+	public static void DestroyHelper(){
+		Destroy (GameObject.Find ("BattleScene"));
 	}
 }

@@ -40,14 +40,23 @@ public class BottomMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Return)){
+		if(Input.GetKeyDown(KeyCode.A)){
 			switch(activeItem){
 			case(int)bMenuItem.fight:
 				print("Fight selected");
-				FightMenuSelected();
+				gameObject.SetActive (false);
+				AttackMenu.S.gameObject.SetActive (true);
+				AttackMenu.updateMoves(BattleScreen.playerPokemon);
+				AttackMoveView.S.gameObject.SetActive (true);
 				break;
 			case(int)bMenuItem.pkmn:
 				print("Pkmn selected");
+				gameObject.SetActive (false);
+				BattleScreen.S.gameObject.SetActive(false);
+				PokemonSwitchMenu.S.gameObject.SetActive (true);
+				PokemonSwitchMenu.UpdateSwitchMenu();
+				HPSwitchTxt.S.gameObject.SetActive (true);
+				HPSwitchTxt.UpdateHPSwitchTxt();
 				break;
 			case(int)bMenuItem.item:
 				print("Item selected");
@@ -73,12 +82,6 @@ public class BottomMenu : MonoBehaviour {
 		menuItems[activeItem].GetComponent<GUIText>().color = Color.black;
 		activeItem = activeItem == 0 ? menuItems.Count - 1: --activeItem;
 		menuItems[activeItem].GetComponent<GUIText>().color = Color.red;	
-	}
-
-	public void FightMenuSelected(){
-		gameObject.SetActive (false);
-		AttackMenu.S.gameObject.SetActive (true);
-		AttackMoveView.S.gameObject.SetActive (true);
 	}
 
 }
