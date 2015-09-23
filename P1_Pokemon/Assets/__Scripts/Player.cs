@@ -107,6 +107,7 @@ public class Player : MonoBehaviour {
 				moving = false;
 				npc.moveTowardPlayer = true;
 				npc.Play_Dialog("Bug_Catcher");
+				enemyNo = 1;
 			}
 			else if(Physics.Raycast(gameObject.transform.position, Vector3.right, out hitInfo, 10f, GetLayerMask(new string[] {"Lass"})) && !fought_Lass){
 				fought_Lass = true;
@@ -114,6 +115,7 @@ public class Player : MonoBehaviour {
 				moving = false;
 				npc.moveTowardPlayer = true;
 				npc.Play_Dialog("Lass");
+				enemyNo = 2;
 			}
 			else if((Physics.Raycast(gameObject.transform.position, Vector3.left, out hitInfo, 8f, GetLayerMask(new string[] {"Youngster"})) || 
 					Physics.Raycast(gameObject.transform.position, Vector3.down, out hitInfo, 5f, GetLayerMask(new string[] {"Youngster"})))&& !fought_YS){
@@ -122,6 +124,7 @@ public class Player : MonoBehaviour {
 				moving = false;
 				npc.moveTowardPlayer = true;
 				npc.Play_Dialog("Youngster");
+				enemyNo = 3;
 			}
 //ARROW KEYS		
 			if(Input.GetKey(KeyCode.RightArrow)){

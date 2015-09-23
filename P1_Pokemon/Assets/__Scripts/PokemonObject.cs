@@ -162,7 +162,11 @@ public class PokemonObject{
 		double modifier1 = 1.0;
 		double modifier2 = 1.0;
 		--atkMove.curPp;
-		curHp -= (int)Math.Floor ((((2.0 * ((double)attacker.level+10.0)/250.0) * (double)attacker.atk/(double)def * (double)atkMove.pwr) + 2) * modifier1 * modifier2);
+		int dmg = (int)Math.Floor ((((2.0 * ((double)attacker.level+10.0)/250.0) * (double)attacker.atk/(double)def * (double)atkMove.pwr) + 2) * modifier1 * modifier2);
+		if ((curHp - dmg) < 0)
+			curHp = 0;
+		else
+			curHp -= dmg;
 		if (curHp <= 0 && isPlayer) {
 			int i;
 			for (i = 0; i < 6; ++i) {
