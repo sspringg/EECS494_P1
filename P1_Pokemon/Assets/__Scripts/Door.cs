@@ -7,7 +7,6 @@ public class Door : MonoBehaviour {
 	
 	void OnCollisionEnter(Collision coll){
 		if(coll.gameObject.tag == "Player"){
-			print("Entered door. Move to(" + doorPos.x + ", " + doorPos.y + ")");
 			Player.S.MoveThroughDoor(doorPos);
 		}
 	}

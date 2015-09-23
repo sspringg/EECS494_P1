@@ -40,7 +40,7 @@ public class Pokemon_Choose : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Main.S.paused){
-			if(Input.GetKeyDown(KeyCode.Return)){
+			if(Input.GetKeyDown(KeyCode.A)){
 				print(activeItem);
 				switch(activeItem){ // at 1:14:00
 				case 0:
@@ -58,7 +58,6 @@ public class Pokemon_Choose : MonoBehaviour {
 				Player.S.pokemon_list[1] = PokemonObject.getPokemon("Pikachu");
 				gameObject.SetActive(false);
 				Main.S.paused = false;
-				print(Player.S.pokemon_list[0]);
 				Dialog.S.HideDialogBox();
 				Player.S.ChosenPokemon = true;
 				Player.S.ChoosingPokemon = false;

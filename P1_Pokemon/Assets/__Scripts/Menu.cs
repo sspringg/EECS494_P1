@@ -15,8 +15,9 @@ public enum menuItem{
 
 public class Menu : MonoBehaviour {
 	public static Menu S;
-	
+	public 	bool items_menu_active = false;
 	public int activeItem;
+	public bool	menuPaused = false;
 	public List<GameObject> menuItems;
 	
 	void Awake(){
@@ -26,7 +27,6 @@ public class Menu : MonoBehaviour {
 	void Start () {
 		bool first = true;
 		activeItem = 0;
-		
 		foreach(Transform child in transform){
 			menuItems.Add (child.gameObject);
 		}
@@ -43,12 +43,8 @@ public class Menu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.X)){
-			gameObject.SetActive(false);
-			Main.S.paused = false;
-		}
-		else if (Main.S.paused){
-			if(Input.GetKeyDown(KeyCode.Return)){
+		if (Main.S.paused && !items_menu_active){
+			if(Input.GetKeyDown(KeyCode.A)){
 				switch(activeItem){ // at 1:14:00
 					case(int)menuItem.pokedex:
 						print("Pokedex menu selected");
@@ -57,7 +53,9 @@ public class Menu : MonoBehaviour {
 						print("Pokemon menu selected");
 						break;
 					case(int)menuItem.item:
-						print("item menu selected");
+						items_menu_active = true;
+						Items_Menu.S.gameObject.SetActive(true);
+						menuPaused = true;
 						break;
 					case(int)menuItem.player:
 						print("player menu selected");
@@ -69,17 +67,23 @@ public class Menu : MonoBehaviour {
 						print("option menu selected");
 						break;
 					case(int)menuItem.exit:
-						print("exit menu selected");
+						gameObject.SetActive(false);
+						Main.S.paused = false;
 						break;
 				
 				}
 			}
 		}
-		if(Input.GetKeyDown(KeyCode.DownArrow)){
+		if(Input.GetKeyDown(KeyCode.DownArrow) && !items_menu_active){
 			MoveDownMenu();
 		}
-		else if (Input.GetKeyDown(KeyCode.UpArrow)){
+		else if (Input.GetKeyDown(KeyCode.UpArrow) && !items_menu_active){
 			MoveUpMenu();
+		}
+		else if(Input.GetKeyDown(KeyCode.S) && items_menu_active){
+			menuPaused = false;
+			items_menu_active = false;
+			Items_Menu.S.gameObject.SetActive(false);
 		}
 	}
 	public void MoveDownMenu(){

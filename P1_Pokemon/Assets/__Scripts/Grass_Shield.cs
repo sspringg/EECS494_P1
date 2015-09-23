@@ -7,7 +7,6 @@ public class Grass_Shield : MonoBehaviour {
 		if(Player.S.ChosenPokemon)
 			gameObject.SetActive(false);
 		else{
-			print("active" + Player.S.ChosenPokemon);
 			Dialog.S.gameObject.SetActive(true);
 			Color noAlpha = GameObject.Find("DialogBackground").GetComponent<GUITexture>().color;
 			noAlpha.a = 255;

@@ -20,7 +20,7 @@ public class Dialog : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		if(Main.S.inDialog && Input.GetKeyDown(KeyCode.Z)){
+		if(Main.S.inDialog && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S))){
 			HideDialogBox();
 			if(Player.S.playerSpeaking != null)
 				Player.S.CheckForAction();

@@ -56,6 +56,7 @@
      <Compile Include="Assets\__Scripts\Door.cs" />
      <Compile Include="Assets\__Scripts\Grass_Shield.cs" />
      <Compile Include="Assets\__Scripts\Heal_Pokemon.cs" />
+     <Compile Include="Assets\__Scripts\Items_Menu.cs" />
      <Compile Include="Assets\__Scripts\Main.cs" />
      <Compile Include="Assets\__Scripts\Mart_Options.cs" />
      <Compile Include="Assets\__Scripts\Menu.cs" />
@@ -68,11 +69,17 @@
      <Compile Include="Assets\__Scripts\Wild_Pokemon.cs" />
      <None Include="Assets\Collision.txt" />
      <None Include="Assets\spriteText.txt" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>/Applications/Unity.app/Contents/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>/Applications/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>/Applications/Unity.app/Contents/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

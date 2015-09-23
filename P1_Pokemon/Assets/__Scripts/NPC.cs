@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System;
 public class NPC : MonoBehaviour {
 
 	public	Sprite	upSprite;
 	public	Sprite	downSprite;
 	public	Sprite	leftSprite;
 	public	Sprite	rightSprite;
+	
+	public bool	moveTowardPlayer = false;
 	
 	public int	leftRightDist;
 	public int	upDownDist;
@@ -16,7 +18,7 @@ public class NPC : MonoBehaviour {
 	private float randomVal;
 	private	int	dictionaryPos;
 	
-	public Random random = new Random();
+	public UnityEngine.Random random = new UnityEngine.Random();
 	
 	public float chanceToMove = 1;
 	
@@ -52,9 +54,9 @@ public class NPC : MonoBehaviour {
 	}
 	void FixedUpdate(){
 		if(allowedToMove){
-			randomVal = Random.Range(0, 100);
+			randomVal = UnityEngine.Random.Range(0, 100);
 			if(randomVal < chanceToMove && (Main.S.inDialog != true)){
-				randomVal = Random.Range(0, 100);
+				randomVal = UnityEngine.Random.Range(0, 100);
 				if(randomVal < 25 && (horizDist > (-leftRightDist)) && (gameObject.transform.position + Vector3.left != Player.S.transform.position)){ //try to move left
 					sprend.sprite = leftSprite;
 					gameObject.transform.position += Vector3.left;
@@ -76,6 +78,39 @@ public class NPC : MonoBehaviour {
 					++vertDist;
 				}
 			}
+		}
+		if(moveTowardPlayer && !Main.S.inDialog){;
+			if((gameObject.transform.position.x - Player.S.transform.position.x) > 1){
+				transform.position += Vector3.left * (Time.deltaTime * 4);
+			}
+			else if((Player.S.transform.position.x - gameObject.transform.position.x) > 1){
+				gameObject.transform.position += Vector3.right * (Time.deltaTime * 4);
+			}
+			else if((gameObject.transform.position.y - Player.S.transform.position.y) > 1){
+				gameObject.transform.position += Vector3.down * (Time.deltaTime * 4);
+			}
+			else if((Player.S.transform.position.y - gameObject.transform.position.y) > 1){
+				gameObject.transform.position += Vector3.up * (Time.deltaTime * 4);
+			}
+			else{
+				//if character ends up kiddy korner move them up or down one square
+				if(Math.Abs(gameObject.transform.position.y - Player.S.transform.position.y) + Math.Abs(gameObject.transform.position.x - Player.S.transform.position.x) > 1.9){
+					if(Player.S.transform.position.y > gameObject.transform.position.y)
+						gameObject.transform.position += Vector3.up;
+					else
+						gameObject.transform.position += Vector3.down;
+				}	
+				moveTowardPlayer = false;
+				if(gameObject.transform.position.x > Player.S.transform.position.x)
+					Player.S.sprend.sprite = Player.S.rightSprite;
+				else if(Player.S.transform.position.x > gameObject.transform.position.x)
+					Player.S.sprend.sprite = Player.S.leftSprite;
+				else if(transform.position.y > Player.S.transform.position.y)
+					Player.S.sprend.sprite = Player.S.upSprite;
+				else if(Player.S.transform.position.y > gameObject.transform.position.y)
+					Player.S.sprend.sprite = Player.S.downSprite;
+			}
+			//Application.LoadLevelAdditive("_Scene_2");
 		}
 	}
 	private string TalkTo(string playerName) {
@@ -134,7 +169,8 @@ public class NPC : MonoBehaviour {
 					return "";
 				case 0:
 					Player.S.speakDictionary["Pokemon_Choose_Table"] = 1;
-				Player.S.speakDictionary["Mom"] = 1;
+					Player.S.speakDictionary["Mom"] = 1;
+					Player.S.speakDictionary["Professor_Oak"] = 2;
 					Player.S.playerSpeaking = null;
 					Player.S.ChoosingPokemon = true;
 					return "Choose your first Pokemon between Squirttle, Bulbasaur, and Charmander";
@@ -198,7 +234,11 @@ public class NPC : MonoBehaviour {
 					Player.S.playerSpeaking = null;
 					return "Not so fast Rookie! It's time to teach you a lesson";
 				case 0:
+					Player.S.speakDictionary["Bug_Catcher"] = 1;
+					return "";
+				case 1:
 					Player.S.playerSpeaking = null;
+					Player.S.speakDictionary["Bug_Catcher"] = 0;
 					return "You got lucky this time. Just wait until I level up my POKeMON";
 					
 				}
@@ -210,7 +250,11 @@ public class NPC : MonoBehaviour {
 				Player.S.playerSpeaking = null;
 				return "You may have beaten Bug Catcher but you will be no match for me!";
 			case 0:
+				Player.S.speakDictionary["Lass"] = 1;
+				return "";
+			case 1:
 				Player.S.playerSpeaking = null;
+				Player.S.speakDictionary["Lass"] = 0;
 				return "I will have my revenge";
 			}
 		}
@@ -221,7 +265,11 @@ public class NPC : MonoBehaviour {
 				Player.S.playerSpeaking = null;
 				return "Impressive I must say. Now it is time for me to teach you what being a Pokemon trainer is really about";
 			case 0:
+				Player.S.speakDictionary["Youngster"] = 1;
+				return "";
+			case 1:
 				Player.S.playerSpeaking = null;
+				Player.S.speakDictionary["Youngster"] = 0;
 				return "You have a bright future Red!";
 			}
 		}
@@ -250,31 +298,34 @@ public class NPC : MonoBehaviour {
 					return "antidote to help heal your POKeMON, and a variety of other items.";
 				case 2:
 					Player.S.speakDictionary["Checkout_Front"] = 3;
-					Player.S.playerSpeaking = null;
 					Player.S.itemsDictionary.Add("Prof_Oak_Package",0);
 					return "Wiat a second! I recognize you. You're Professor Oaks new prodigy. Here is a package, can you take it to him?";
 				case 3:
+					Player.S.playerSpeaking = null;
 					Player.S.speakDictionary["Checkout_Front"] = 4;
-					return "";
+					return "[Red Received Professor Oak's package]";
 				case 4:
+					Player.S.speakDictionary["Checkout_Front"] = 5;
+					return "";
+				case 5:
 					Player.S.playerSpeaking = null;
 					Player.S.Mart_Options = true;
 					return "We have plenty of great stuff in stock today! What would you like?";
-				case 5:
-					Player.S.speakDictionary["Checkout_Front"] = 9;
-					return "Pokeball, great choice! Good luck and be careful with it";
 				case 6:
-					Player.S.speakDictionary["Checkout_Front"] = 9;
-					return "That's the best Antidote money can buy!";
+					Player.S.speakDictionary["Checkout_Front"] = 10;
+					return "Pokeball, great choice! Good luck and be careful with it";
 				case 7:
-					Player.S.speakDictionary["Checkout_Front"] = 9;
-					return "This will get your POKeMON feeling better in no time!";
+					Player.S.speakDictionary["Checkout_Front"] = 10;
+					return "That's the best Antidote money can buy!";
 				case 8:
-					Player.S.speakDictionary["Checkout_Front"] = 3;
+					Player.S.speakDictionary["Checkout_Front"] = 10;
+					return "This will get your POKeMON feeling better in no time!";
+				case 9:
+					Player.S.speakDictionary["Checkout_Front"] = 4;
 					Player.S.playerSpeaking = null;
 					return "You don't have enough money to buy that. You can earn money by winning POKeMON battles.";
-				case 9:
-					Player.S.speakDictionary["Checkout_Front"] = 3;
+				case 10:
+					Player.S.speakDictionary["Checkout_Front"] = 4;
 					Player.S.playerSpeaking = null;
 					return "Thank you for your business, have a great day!";
 
@@ -336,15 +387,16 @@ public class NPC : MonoBehaviour {
 					return "";
 				case 0:
 					Player.S.playerSpeaking = null;
+				Player.S.speakDictionary["Mom"] = -1;
 					return "Mom: It's time to go out and explore the world";
 				case 1:
-					Player.S.speakDictionary["Mom"] = 0;
+					Player.S.speakDictionary["Mom"] = 2;
 					return "";
 				case 2:
-					Player.S.speakDictionary["Mom"] = 2;
+					Player.S.speakDictionary["Mom"] = 3;
 					return "Red, you should take a quick rest";
 				case 3:
-					Player.S.speakDictionary["Mom"] = 3;
+					Player.S.speakDictionary["Mom"] = 4;
 					return "...";
 				case 4:
 					Player.S.speakDictionary["Mom"] = 1;

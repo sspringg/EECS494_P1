@@ -17,7 +17,6 @@ public class Heal_Pokemon : MonoBehaviour {
 		S = this;
 	}
 	void Start () {
-		GameObject.Find("Heal_Pokemon/POKeBALL").SetActive(false);
 		bool first = true;
 		activeItem = 0;
 		
@@ -36,8 +35,8 @@ public class Heal_Pokemon : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Main.S.paused){
-			if(Input.GetKeyDown(KeyCode.Return)){
-				print(activeItem);
+			if(Input.GetKeyDown(KeyCode.A)){
+
 				switch(activeItem){ 
 				case(int)Heal_list.Heal:
 					Player.S.speakDictionary["Forward_Clerk"] = 3;
