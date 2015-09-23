@@ -16,6 +16,7 @@ public class AttackMenu : MonoBehaviour {
 	
 	public int activeItem;
 	public List<GameObject> menuItems;
+	public string msg;
 	
 	void Awake(){
 		S = this;
@@ -44,7 +45,7 @@ public class AttackMenu : MonoBehaviour {
 		AttackMoveView.updateMoveView(activeItem, BattleScreen.playerPokemon);
 		PokemonObject playerPkmn = BattleScreen.playerPokemon;
 		PokemonObject oppoPkmn = BattleScreen.opponentPokemon;
-		if(Input.GetKeyDown(KeyCode.Return)){
+		if(Input.GetKeyDown(KeyCode.A)){
 			switch(activeItem){
 			case(int)aMenuItem.move1:
 				print("Move1 selected");
@@ -53,10 +54,22 @@ public class AttackMenu : MonoBehaviour {
 				}
 				else if (playerPkmn.speed >= oppoPkmn.speed){
 					oppoPkmn.takeHit(playerPkmn.move1, playerPkmn);
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn); 
+					msg = playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move1.moveName + '\n'+ '\n';
+					msg += oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				} else{
 					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
 					oppoPkmn.takeHit(playerPkmn.move1, playerPkmn);
+					msg = oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName + '\n'+ '\n';
+					msg += playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move1.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				}
 				break;
 			case(int)aMenuItem.move2:
@@ -67,9 +80,21 @@ public class AttackMenu : MonoBehaviour {
 				else if (playerPkmn.speed >= oppoPkmn.speed){
 					oppoPkmn.takeHit(playerPkmn.move2, playerPkmn);
 					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
+					msg = playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move2.moveName + '\n'+ '\n';
+					msg += oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				} else{
 					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
 					oppoPkmn.takeHit(playerPkmn.move2, playerPkmn);
+					msg = oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName + '\n'+ '\n';
+					msg += playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move2.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				}
 				break;
 			case(int)aMenuItem.move3:
@@ -80,9 +105,21 @@ public class AttackMenu : MonoBehaviour {
 				else if (playerPkmn.speed >= oppoPkmn.speed){
 					oppoPkmn.takeHit(playerPkmn.move3, playerPkmn);
 					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
+					msg = playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move3.moveName + '\n'+ '\n';
+					msg += oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				} else{
 					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
 					oppoPkmn.takeHit(playerPkmn.move3, playerPkmn);
+					msg = oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName + '\n'+ '\n';
+					msg += playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move3.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				}
 				break;
 			case(int)aMenuItem.move4:
@@ -93,9 +130,21 @@ public class AttackMenu : MonoBehaviour {
 				else if (playerPkmn.speed >= oppoPkmn.speed){
 					oppoPkmn.takeHit(playerPkmn.move4, playerPkmn);
 					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
+					msg = playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move4.moveName + '\n'+ '\n';
+					msg += oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				} else{
 					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
 					oppoPkmn.takeHit(playerPkmn.move4, playerPkmn);
+					msg = oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName + '\n'+ '\n';
+					msg += playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move4.moveName;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					TurnActionViewer.S.gameObject.SetActive (true);
+					TurnActionViewer.printMessage (msg);
 				}
 				break;
 			}
@@ -106,7 +155,7 @@ public class AttackMenu : MonoBehaviour {
 		else if (Input.GetKeyDown(KeyCode.UpArrow)){
 			MoveUpMenu();
 		}
-		else if (Input.GetKeyDown(KeyCode.X))
+		else if (Input.GetKeyDown(KeyCode.S))
 		{
 			gameObject.SetActive(false);
 			AttackMoveView.S.gameObject.SetActive(false);

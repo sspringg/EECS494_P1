@@ -40,7 +40,7 @@ public class BottomMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Return)){
+		if(Input.GetKeyDown(KeyCode.A)){
 			switch(activeItem){
 			case(int)bMenuItem.fight:
 				print("Fight selected");
@@ -56,6 +56,7 @@ public class BottomMenu : MonoBehaviour {
 				PokemonSwitchMenu.S.gameObject.SetActive (true);
 				PokemonSwitchMenu.UpdateSwitchMenu();
 				HPSwitchTxt.S.gameObject.SetActive (true);
+				HPSwitchTxt.UpdateHPSwitchTxt();
 				break;
 			case(int)bMenuItem.item:
 				print("Item selected");

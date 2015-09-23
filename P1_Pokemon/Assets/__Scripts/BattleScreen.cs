@@ -13,8 +13,8 @@ public class BattleScreen : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		updatePokemon (false, PokemonObject.getPokemon ("Bulbasaur"));
-		updatePokemon (true, PokemonObject.getPokemon ("Charmander"));
+		updatePokemon (true, Player.S.pokemon_list[0]);
+		updatePokemon (false, PokemonObject.getPokemon ("Charmander"));
 	}
 	
 	// Update is called once per frame

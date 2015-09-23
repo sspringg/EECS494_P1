@@ -122,7 +122,7 @@ public class Player : MonoBehaviour {
 					direction = Direction.down;
 					sprend.sprite = downSprite;
 					BC_move = false;
-					//Application.LoadLevelAdditive("_Scene_2");
+					Application.LoadLevelAdditive("_Scene_2");
 				}
 			}
 			else if(Lass_move){
@@ -135,7 +135,7 @@ public class Player : MonoBehaviour {
 					direction = Direction.down;
 					sprend.sprite = downSprite;
 					Lass_move = false;
-					//Application.LoadLevelAdditive("_Scene_2");
+					Application.LoadLevelAdditive("_Scene_2");
 				}
 			}
 			else if(Youngster_move){
@@ -147,7 +147,7 @@ public class Player : MonoBehaviour {
 					direction = Direction.down;
 					sprend.sprite = downSprite;
 					Youngster_move = false;
-					//Application.LoadLevelAdditive("_Scene_2");
+					Application.LoadLevelAdditive("_Scene_2");
 				}
 			}	
 ////////////////////////////////////
