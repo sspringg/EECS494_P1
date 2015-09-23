@@ -20,6 +20,12 @@ public class Player : MonoBehaviour {
 //initilizing variable
 	public static Player S;
 	public PokemonObject[] pokemon_list;
+	public PokemonObject BC_pkmn;
+	public PokemonObject Lass_pkmn;
+	public PokemonObject YS_pkmn;
+	public PokemonObject wildPkmn1;
+	public PokemonObject wildPkmn2;
+	public int enemyNo;
 	public float 	moveSpeed;
 	public int		tileSize;
 	
@@ -66,6 +72,21 @@ public class Player : MonoBehaviour {
 		pokemon_list [3] = PokemonObject.getPokemon ("None");
 		pokemon_list [4] = PokemonObject.getPokemon ("None");
 		pokemon_list [5] = PokemonObject.getPokemon ("None");
+		BC_pkmn = PokemonObject.getPokemon ("Caterpie");
+		Lass_pkmn = PokemonObject.getPokemon ("Squirtle");
+		Lass_pkmn.level = 3;
+		Lass_pkmn.totHp -= 10;
+		Lass_pkmn.curHp -= 10;
+		Lass_pkmn.atk -= 10;
+		Lass_pkmn.def -= 10;
+		YS_pkmn = PokemonObject.getPokemon ("Bulbasaur");
+		YS_pkmn.level = 3;
+		YS_pkmn.totHp -= 10;
+		YS_pkmn.curHp -= 10;
+		YS_pkmn.atk -= 10;
+		YS_pkmn.def -= 10;
+		wildPkmn1 = PokemonObject.getPokemon ("Caterpie");
+		wildPkmn2 = PokemonObject.getPokemon ("Caterpie");
 	}
 	
 	new public Rigidbody rigidbody{
@@ -122,6 +143,7 @@ public class Player : MonoBehaviour {
 					direction = Direction.down;
 					sprend.sprite = downSprite;
 					BC_move = false;
+					enemyNo = 1;
 					Application.LoadLevelAdditive("_Scene_2");
 				}
 			}
@@ -135,6 +157,7 @@ public class Player : MonoBehaviour {
 					direction = Direction.down;
 					sprend.sprite = downSprite;
 					Lass_move = false;
+					enemyNo = 2;
 					Application.LoadLevelAdditive("_Scene_2");
 				}
 			}
@@ -147,6 +170,7 @@ public class Player : MonoBehaviour {
 					direction = Direction.down;
 					sprend.sprite = downSprite;
 					Youngster_move = false;
+					enemyNo = 3;
 					Application.LoadLevelAdditive("_Scene_2");
 				}
 			}	

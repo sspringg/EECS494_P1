@@ -49,12 +49,12 @@ public class AttackMenu : MonoBehaviour {
 			switch(activeItem){
 			case(int)aMenuItem.move1:
 				print("Move1 selected");
-				if (playerPkmn.move1.moveName == "None"){
+				if (playerPkmn.move1.moveName == "None" || playerPkmn.move1.curPp <= 0){
 					print ("this move isn't available");
 				}
 				else if (playerPkmn.speed >= oppoPkmn.speed){
-					oppoPkmn.takeHit(playerPkmn.move1, playerPkmn);
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn); 
+					oppoPkmn.takeHit(playerPkmn.move1, playerPkmn, false);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true); 
 					msg = playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move1.moveName + '\n'+ '\n';
 					msg += oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName;
 					AttackMenu.S.gameObject.SetActive (false);
@@ -62,8 +62,8 @@ public class AttackMenu : MonoBehaviour {
 					TurnActionViewer.S.gameObject.SetActive (true);
 					TurnActionViewer.printMessage (msg);
 				} else{
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
-					oppoPkmn.takeHit(playerPkmn.move1, playerPkmn);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true);
+					oppoPkmn.takeHit(playerPkmn.move1, playerPkmn, false);
 					msg = oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName + '\n'+ '\n';
 					msg += playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move1.moveName;
 					AttackMenu.S.gameObject.SetActive (false);
@@ -74,12 +74,12 @@ public class AttackMenu : MonoBehaviour {
 				break;
 			case(int)aMenuItem.move2:
 				print("Move2 selected");
-				if (playerPkmn.move2.moveName == "None"){
+				if (playerPkmn.move2.moveName == "None" || playerPkmn.move1.curPp <= 0){
 					print ("this move isn't available");
 				}
 				else if (playerPkmn.speed >= oppoPkmn.speed){
-					oppoPkmn.takeHit(playerPkmn.move2, playerPkmn);
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
+					oppoPkmn.takeHit(playerPkmn.move2, playerPkmn, false);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true);
 					msg = playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move2.moveName + '\n'+ '\n';
 					msg += oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName;
 					AttackMenu.S.gameObject.SetActive (false);
@@ -87,8 +87,8 @@ public class AttackMenu : MonoBehaviour {
 					TurnActionViewer.S.gameObject.SetActive (true);
 					TurnActionViewer.printMessage (msg);
 				} else{
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
-					oppoPkmn.takeHit(playerPkmn.move2, playerPkmn);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true);
+					oppoPkmn.takeHit(playerPkmn.move2, playerPkmn, false);
 					msg = oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName + '\n'+ '\n';
 					msg += playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move2.moveName;
 					AttackMenu.S.gameObject.SetActive (false);
@@ -99,12 +99,12 @@ public class AttackMenu : MonoBehaviour {
 				break;
 			case(int)aMenuItem.move3:
 				print("Move3 selected");
-				if (playerPkmn.move3.moveName == "None"){
+				if (playerPkmn.move3.moveName == "None" || playerPkmn.move1.curPp <= 0){
 					print ("this move isn't available");
 				}
 				else if (playerPkmn.speed >= oppoPkmn.speed){
-					oppoPkmn.takeHit(playerPkmn.move3, playerPkmn);
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
+					oppoPkmn.takeHit(playerPkmn.move3, playerPkmn, false);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true);
 					msg = playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move3.moveName + '\n'+ '\n';
 					msg += oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName;
 					AttackMenu.S.gameObject.SetActive (false);
@@ -112,8 +112,8 @@ public class AttackMenu : MonoBehaviour {
 					TurnActionViewer.S.gameObject.SetActive (true);
 					TurnActionViewer.printMessage (msg);
 				} else{
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
-					oppoPkmn.takeHit(playerPkmn.move3, playerPkmn);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true);
+					oppoPkmn.takeHit(playerPkmn.move3, playerPkmn, false);
 					msg = oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName + '\n'+ '\n';
 					msg += playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move3.moveName;
 					AttackMenu.S.gameObject.SetActive (false);
@@ -124,12 +124,12 @@ public class AttackMenu : MonoBehaviour {
 				break;
 			case(int)aMenuItem.move4:
 				print("Move4 selected");
-				if (playerPkmn.move4.moveName == "None"){
+				if (playerPkmn.move4.moveName == "None" || playerPkmn.move1.curPp <= 0){
 					print ("this move isn't available");
 				}
 				else if (playerPkmn.speed >= oppoPkmn.speed){
-					oppoPkmn.takeHit(playerPkmn.move4, playerPkmn);
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
+					oppoPkmn.takeHit(playerPkmn.move4, playerPkmn, false);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true);
 					msg = playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move4.moveName + '\n'+ '\n';
 					msg += oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName;
 					AttackMenu.S.gameObject.SetActive (false);
@@ -137,8 +137,8 @@ public class AttackMenu : MonoBehaviour {
 					TurnActionViewer.S.gameObject.SetActive (true);
 					TurnActionViewer.printMessage (msg);
 				} else{
-					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn);
-					oppoPkmn.takeHit(playerPkmn.move4, playerPkmn);
+					playerPkmn.takeHit(oppoPkmn.move1, oppoPkmn, true);
+					oppoPkmn.takeHit(playerPkmn.move4, playerPkmn, false);
 					msg = oppoPkmn.pkmnName + " attacks " + playerPkmn.pkmnName + " with " + oppoPkmn.move1.moveName + '\n'+ '\n';
 					msg += playerPkmn.pkmnName + " attacks " + oppoPkmn.pkmnName + " with " + playerPkmn.move4.moveName;
 					AttackMenu.S.gameObject.SetActive (false);

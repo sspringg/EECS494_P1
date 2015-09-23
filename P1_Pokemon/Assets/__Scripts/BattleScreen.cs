@@ -13,15 +13,30 @@ public class BattleScreen : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		updatePokemon (true, Player.S.pokemon_list[0]);
-		updatePokemon (false, PokemonObject.getPokemon ("Charmander"));
+		for (int i = 0; i < 6; ++i) {
+			if (Player.S.pokemon_list[i].curHp > 0){
+				updatePokemon (true, Player.S.pokemon_list[i]);
+				break;
+			}
+		}
+		switch (Player.S.enemyNo) {
+		case 1:
+			updatePokemon (false, Player.S.BC_pkmn);
+			break;
+		case 2:
+			updatePokemon (false, Player.S.Lass_pkmn);
+			break;
+		case 3:
+			updatePokemon (false, Player.S.YS_pkmn);
+			break;
+		default:
+			updatePokemon (false, PokemonObject.getPokemon ("Charmander"));
+			break;
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (playerPokemon.curHp <= 0 || opponentPokemon.curHp <= 0) {
-			Destroy (GameObject.Find ("BattleScene"));
-		}
 		GUIText myText;
 		myText = GameObject.Find ("HPVal1").GetComponent<GUIText> ();
 		myText.text = playerPokemon.curHp.ToString () + '/' + playerPokemon.totHp.ToString();
@@ -33,6 +48,7 @@ public class BattleScreen : MonoBehaviour {
 		GUIText myText;
 		if (isPlayer) {
 			BattleScreen.playerPokemon = curPkmn;
+			curPkmn.fought = true;
 			myText = GameObject.Find ("NameVal1").GetComponent<GUIText> ();
 			myText.text = curPkmn.pkmnName;
 			
@@ -52,5 +68,9 @@ public class BattleScreen : MonoBehaviour {
 			myText = GameObject.Find ("HPVal2").GetComponent<GUIText>();
 			myText.text = curPkmn.curHp.ToString () + '/' + curPkmn.totHp.ToString();
 		}
+	}
+
+	public static void DestroyHelper(){
+		Destroy (GameObject.Find ("BattleScene"));
 	}
 }

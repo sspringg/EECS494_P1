@@ -37,6 +37,7 @@ public class PokemonObject{
 	public int speed;
 	public int level;
 	public int exp;
+	public bool fought;
 
 	public AttackMove move1;
 	public AttackMove move2;
@@ -52,6 +53,7 @@ public class PokemonObject{
 		PokemonObject pkmn = new PokemonObject ();
 		pkmn.level = 5;
 		pkmn.exp = 5 * 5 * 5;
+		pkmn.fought = false;
 		switch (inputName) {
 		case "Bulbasaur":
 			pkmn.pkmnName = "Bulbasaur";
@@ -65,7 +67,7 @@ public class PokemonObject{
 			pkmn.spDef = 65;
 			pkmn.speed = 45;
 			pkmn.move1 = AttackMove.getMove("Tackle");
-			pkmn.move2 = AttackMove.getMove("None");
+			pkmn.move2 = AttackMove.getMove("Scratch");
 			pkmn.move3 = AttackMove.getMove("None");
 			pkmn.move4 = AttackMove.getMove("None");
 			break;
@@ -117,6 +119,23 @@ public class PokemonObject{
 			pkmn.move3 = AttackMove.getMove("None");
 			pkmn.move4 = AttackMove.getMove("None");
 			break;
+		case "Caterpie":
+			pkmn.pkmnName = "Caterpie";
+			pkmn.type1 = pkmnType.bug;
+			pkmn.type2 = pkmnType.none;
+			pkmn.totHp = 45;
+			pkmn.curHp = 45;
+			pkmn.atk = 30;
+			pkmn.def = 35;
+			pkmn.spAtk = 20;
+			pkmn.spDef = 20;
+			pkmn.speed = 45;
+			pkmn.move1 = AttackMove.getMove("Bug Bite");
+			pkmn.move2 = AttackMove.getMove("Tackle");
+			pkmn.move3 = AttackMove.getMove("None");
+			pkmn.move4 = AttackMove.getMove("None");
+			pkmn.level = 3;
+			break;
 		default :
 			pkmn.pkmnName = "None";
 			pkmn.type1 = pkmnType.none;
@@ -137,12 +156,68 @@ public class PokemonObject{
 		return pkmn;
 	}
 
-	public void takeHit(AttackMove atkMove, PokemonObject attacker){
+	public void takeHit(AttackMove atkMove, PokemonObject attacker, bool isPlayer){
 		if (atkMove.moveName == "None")
 			return;
-		double modifier1 = 1;
-		double modifier2 = 1;
+		double modifier1 = 1.0;
+		double modifier2 = 1.0;
 		--atkMove.curPp;
-		curHp -= (int)Math.Floor((((2.0 * (attacker.level + 10.0) / 250.0) * (attacker.atk / def) * atkMove.pwr) + 2.0) * modifier1 * modifier2);
+		curHp -= (int)Math.Floor ((((2.0 * ((double)attacker.level+10.0)/250.0) * (double)attacker.atk/(double)def * (double)atkMove.pwr) + 2) * modifier1 * modifier2);
+		if (curHp <= 0 && isPlayer) {
+			int i;
+			for (i = 0; i < 6; ++i) {
+				if (Player.S.pokemon_list [i].curHp > 0) {
+					BattleScreen.updatePokemon (true, Player.S.pokemon_list [i]);
+					break;
+				}
+			}
+			if (i == 6) {
+				Vector3 pos;
+				pos.x = 21;
+				pos.y = 102;
+				pos.z = -0.01f;
+				Player.S.MoveThroughDoor (pos);
+				for (int j = 0; j < 6; ++j) {
+					Player.S.pokemon_list [j].curHp = Player.S.pokemon_list [j].totHp;
+					Player.S.pokemon_list [j].move1.curPp = Player.S.pokemon_list [j].move1.totPp;
+					Player.S.pokemon_list [j].move2.curPp = Player.S.pokemon_list [j].move2.totPp;
+					Player.S.pokemon_list [j].move3.curPp = Player.S.pokemon_list [j].move3.totPp;
+					Player.S.pokemon_list [j].move4.curPp = Player.S.pokemon_list [j].move4.totPp;
+				}
+				BattleScreen.DestroyHelper ();
+			}
+		} else if (curHp <= 0 && !isPlayer) {
+			int x;
+			string print = "";
+			for (int i = 0; i < 6; ++i){
+				if (Player.S.pokemon_list[i].curHp > 0 && Player.S.pokemon_list[i].fought){
+					Player.S.pokemon_list[i].exp += 31*level;
+					x = Player.S.pokemon_list[i].level + 1;
+					Player.S.pokemon_list[i].fought = false;
+					if (Player.S.pokemon_list[i].exp > x*x*x){
+						++Player.S.pokemon_list[i].level;
+						Player.S.pokemon_list[i].totHp += 5;
+						Player.S.pokemon_list[i].curHp += 5;
+						Player.S.pokemon_list[i].atk += 5;
+						Player.S.pokemon_list[i].def += 5;
+						Player.S.pokemon_list[i].spAtk += 5;
+						Player.S.pokemon_list[i].spDef += 5;
+						Player.S.pokemon_list[i].speed += 5;
+						print += Player.S.pokemon_list[i].pkmnName + ", ";
+					}
+					if (print != ""){
+						print += "have leveled up";
+						AttackMenu.S.gameObject.SetActive (false);
+						AttackMoveView.S.gameObject.SetActive (false);
+						LevelUpViewer.S.gameObject.SetActive (true);
+						LevelUpViewer.printMessage (print);
+						Debug.Log("Game should end");
+					}
+					else {
+						BattleScreen.DestroyHelper();
+					}
+				}
+			}
+		}
 	}
 }
