@@ -109,8 +109,8 @@ public class NPC : MonoBehaviour {
 					Player.S.sprend.sprite = Player.S.upSprite;
 				else if(Player.S.transform.position.y > gameObject.transform.position.y)
 					Player.S.sprend.sprite = Player.S.downSprite;
+				Application.LoadLevelAdditive("_Scene_2");
 			}
-			Application.LoadLevelAdditive("_Scene_2");
 		}
 	}
 	private string TalkTo(string playerName) {
@@ -298,7 +298,7 @@ public class NPC : MonoBehaviour {
 					return "antidote to help heal your POKeMON, and a variety of other items.";
 				case 2:
 					Player.S.speakDictionary["Checkout_Front"] = 3;
-					Player.S.itemsDictionary.Add("Prof_Oak_Package",0);
+					Player.S.itemsDictionary.Add("Prof_Oak_Package",1);
 					return "Wiat a second! I recognize you. You're Professor Oaks new prodigy. Here is a package, can you take it to him?";
 				case 3:
 					Player.S.playerSpeaking = null;

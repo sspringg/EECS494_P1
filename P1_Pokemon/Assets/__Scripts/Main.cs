@@ -20,7 +20,8 @@ public class Main : MonoBehaviour {
 			Menu.S.gameObject.SetActive(true);
 			paused = true;
 		}
-		else if(paused && Menu.S.gameObject.activeSelf && Input.GetKeyDown(KeyCode.S) && !Items_Menu.S.gameObject.activeSelf){
+		else if(paused && Menu.S.gameObject.activeSelf && Input.GetKeyDown(KeyCode.S) && !Items_Menu.S.gameObject.activeSelf 
+				&& !Pokemon_Menu.S.gameObject.activeSelf){
 			Menu.S.gameObject.SetActive(false);
 			paused = false;
 		}

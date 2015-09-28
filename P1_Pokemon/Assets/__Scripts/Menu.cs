@@ -16,6 +16,7 @@ public enum menuItem{
 public class Menu : MonoBehaviour {
 	public static Menu S;
 	public 	bool items_menu_active = false;
+	public	bool pokemon_menu_active = false;
 	public int activeItem;
 	public bool	menuPaused = false;
 	public List<GameObject> menuItems;
@@ -43,14 +44,17 @@ public class Menu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Main.S.paused && !items_menu_active){
+		if (Main.S.paused && !items_menu_active && !pokemon_menu_active){
 			if(Input.GetKeyDown(KeyCode.A)){
 				switch(activeItem){ // at 1:14:00
 					case(int)menuItem.pokedex:
 						print("Pokedex menu selected");
 						break;
 					case(int)menuItem.pokemon:
-						print("Pokemon menu selected");
+						print("Pokemon menu");
+						pokemon_menu_active = true;
+						Pokemon_Menu.S.gameObject.SetActive(true);
+						menuPaused = true;
 						break;
 					case(int)menuItem.item:
 						items_menu_active = true;
@@ -74,16 +78,21 @@ public class Menu : MonoBehaviour {
 				}
 			}
 		}
-		if(Input.GetKeyDown(KeyCode.DownArrow) && !items_menu_active){
+		if(Input.GetKeyDown(KeyCode.DownArrow) && !menuPaused){
 			MoveDownMenu();
 		}
-		else if (Input.GetKeyDown(KeyCode.UpArrow) && !items_menu_active){
+		else if (Input.GetKeyDown(KeyCode.UpArrow) && !menuPaused){
 			MoveUpMenu();
 		}
 		else if(Input.GetKeyDown(KeyCode.S) && items_menu_active){
 			menuPaused = false;
 			items_menu_active = false;
 			Items_Menu.S.gameObject.SetActive(false);
+		}
+		else if(Input.GetKeyDown(KeyCode.S) && pokemon_menu_active){
+			menuPaused = false;
+			pokemon_menu_active = false;
+			Pokemon_Menu.S.gameObject.SetActive(false);
 		}
 	}
 	public void MoveDownMenu(){
