@@ -200,37 +200,6 @@ public class PokemonObject{
 				}
 				BattleScreen.DestroyHelper ();
 			}
-		} else if (curHp <= 0 && !isPlayer) {
-			int x;
-			string print = "";
-			for (int i = 0; i < 6; ++i){
-				if (Player.S.pokemon_list[i].curHp > 0 && Player.S.pokemon_list[i].fought){
-					Player.S.pokemon_list[i].exp += 31*level;
-					x = Player.S.pokemon_list[i].level + 1;
-					Player.S.pokemon_list[i].fought = false;
-					if (Player.S.pokemon_list[i].exp > x*x*x){
-						++Player.S.pokemon_list[i].level;
-						Player.S.pokemon_list[i].totHp += 5;
-						Player.S.pokemon_list[i].curHp += 5;
-						Player.S.pokemon_list[i].atk += 5;
-						Player.S.pokemon_list[i].def += 5;
-						Player.S.pokemon_list[i].spAtk += 5;
-						Player.S.pokemon_list[i].spDef += 5;
-						Player.S.pokemon_list[i].speed += 5;
-						print += Player.S.pokemon_list[i].pkmnName + ", ";
-					}
-				}
-			}
-			if (print != ""){
-				print += "have leveled up";
-				AttackMenu.S.gameObject.SetActive (false);
-				AttackMoveView.S.gameObject.SetActive (false);
-				LevelUpViewer.S.gameObject.SetActive (true);
-				LevelUpViewer.printMessage (print);
-			}
-			else {
-				BattleScreen.DestroyHelper();
-			}
 		}
 	}
 }

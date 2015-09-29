@@ -45,8 +45,9 @@ public class Pokemon_Stats_Menu : MonoBehaviour {
 		Poke_Stats_lists[5].GetComponent<GUIText>().text = cur_poke.pkmnName;
 		Poke_Stats_lists[6].GetComponent<GUIText>().text = "L" + cur_poke.level.ToString();
 		Poke_Stats_lists[7].GetComponent<GUIText>().text = "HP " + cur_poke.curHp.ToString() + "/" + cur_poke.totHp.ToString();
-		Poke_Stats_lists[8].GetComponent<GUIText>().text = "STATUS/";// + cur_poke.status;
-		Poke_Stats_lists[9].GetComponent<GUIText>().text = "Type/";
+		Poke_Stats_lists[8].GetComponent<GUIText>().text = "STATUS/" + cur_poke.stat;
+		Poke_Stats_lists[9].GetComponent<GUIText>().text = "Type1/" + cur_poke.type1;
+		Poke_Stats_lists [10].GetComponent<GUIText> ().text = "Type2/" + cur_poke.type2;
 
 	}
 }
