@@ -54,6 +54,7 @@
      <Compile Include="Assets\__Scripts\CameraFollow.cs" />
      <Compile Include="Assets\__Scripts\Dialog.cs" />
      <Compile Include="Assets\__Scripts\Door.cs" />
+     <Compile Include="Assets\__Scripts\EndTextViewer.cs" />
      <Compile Include="Assets\__Scripts\Grass_Shield.cs" />
      <Compile Include="Assets\__Scripts\HPSwitchTxt.cs" />
      <Compile Include="Assets\__Scripts\Heal_Pokemon.cs" />
