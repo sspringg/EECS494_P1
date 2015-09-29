@@ -58,6 +58,7 @@
      <Compile Include="Assets\__Scripts\HPSwitchTxt.cs" />
      <Compile Include="Assets\__Scripts\Heal_Pokemon.cs" />
      <Compile Include="Assets\__Scripts\Items_Menu.cs" />
+     <Compile Include="Assets\__Scripts\Items_Menu_2.cs" />
      <Compile Include="Assets\__Scripts\LevelUpViewer.cs" />
      <Compile Include="Assets\__Scripts\Main.cs" />
      <Compile Include="Assets\__Scripts\Mart_Options.cs" />

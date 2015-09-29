@@ -62,7 +62,7 @@ public class Mart_Options : MonoBehaviour {
 					case(int)Item_list.Palyz_Heal:
 						if(Player.S.money >= 200){
 							Player.S.money -= 200;
-							addPlayerItem("PALYZ HEAL");
+							addPlayerItem("PALYZ_HEAL");
 							Player.S.speakDictionary["Checkout_Front"] = 8;
 						}
 						else
@@ -72,7 +72,7 @@ public class Mart_Options : MonoBehaviour {
 					case (int)Item_list.Burn_Heal:
 						if(Player.S.money >= 250){
 							Player.S.money -= 250;
-							addPlayerItem("BURN HEAL");
+							addPlayerItem("BURN_HEAL");
 							Player.S.speakDictionary["Checkout_Front"] = 8;
 						}
 						else

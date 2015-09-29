@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 
 public enum ItemMenu_list{
-	Pokeball,
-	Antidote,
-	Palyz_Heal,
-	Burn_Heal,
-	Cancel
+	POKeBALL,
+	ANTIDOTE,
+	PALYZ_HEAL,
+	BURN_HEAL,
+	CANCEL
 }
 
 public class Items_Menu : MonoBehaviour {
@@ -16,7 +16,9 @@ public class Items_Menu : MonoBehaviour {
 	public static Items_Menu S;
 	public List<GameObject> ItemMenu_lists;
 	public List<GameObject>	Perm_Items; 
+	public bool Items_Menu_2_active = false, items_menu_paused = false;
 	string key, value;
+	public string itemChosen;
 	void Awake(){
 		S = this;
 	}
@@ -36,19 +38,25 @@ public class Items_Menu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Menu.S.menuPaused){
+		if (Menu.S.menuPaused && !Items_Menu_2_active){
 			setPlayerItems();
 			if(Input.GetKeyDown(KeyCode.A)){
-				if(ItemMenu_lists[activeItem].GetComponent<GUIText>().text == "CANCEL"){
-						gameObject.SetActive(false);
-						Menu.S.menuPaused = false;
-						Menu.S.items_menu_active = false;	
+				if(activeItem == 5){
+					gameObject.SetActive(false);
+					Menu.S.menuPaused = false;
+					Menu.S.items_menu_active = false;
+				}
+				else{
+					itemChosen = ItemMenu_lists[activeItem].GetComponent<GUIText>().text.Substring(0, ItemMenu_lists[activeItem].GetComponent<GUIText>().text.Length - 4);
+					Items_Menu_2.S.gameObject.SetActive(true);
+					Items_Menu_2_active = true;
+					items_menu_paused = true;
 				}
 			}
-			if(Input.GetKeyDown(KeyCode.DownArrow)){
+			if(Input.GetKeyDown(KeyCode.DownArrow) && !items_menu_paused){
 				MoveDownMenu();
 			}
-			else if (Input.GetKeyDown(KeyCode.UpArrow)){
+			else if (Input.GetKeyDown(KeyCode.UpArrow) && !items_menu_paused){
 				MoveUpMenu();
 			}
 		}
@@ -74,11 +82,13 @@ public class Items_Menu : MonoBehaviour {
 		}
 	}
 	private void setPlayerItems(){
-		ItemMenu_lists = Perm_Items;
 		int i = 0;
 		foreach(KeyValuePair<string, int> entry in Player.S.itemsDictionary){
 				ItemMenu_lists[i].GetComponent<GUIText>().text = entry.Key + " X " + entry.Value;
-			++i;
+				++i;
+		}
+		for(int j = i; j < ItemMenu_lists.Count - 1; ++j){
+			ItemMenu_lists[j].GetComponent<GUIText>().text = "";
 		}
 	}
 }

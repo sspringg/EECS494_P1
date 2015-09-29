@@ -36,17 +36,45 @@ public class Pokemon_Menu : MonoBehaviour {
 		}
 		if (Menu.S.menuPaused && !pokemon_menu_2_active){
 			setPlayerItems();
-			if(Input.GetKeyDown(KeyCode.A) && !moving_pokemon){
+			if(Input.GetKeyDown(KeyCode.A) && !moving_pokemon && !Items_Menu_2.S.usingItem){
 				pokemon_menu_chosen = activeItem;
 				Pokemon_Menu_2.S.gameObject.SetActive(true);
 				pokemon_menu_2_active = true;
 				Pokemon_Menu_paused = true;
 			}
 			else if(Input.GetKeyDown(KeyCode.A) && moving_pokemon){
-				PokemonObject temp = Player.S.pokemon_list[pokemon_menu_chosen];
-				Player.S.pokemon_list[pokemon_menu_chosen] = Player.S.pokemon_list[activeItem];
+				PokemonObject temp = Player.S.pokemon_list[activeItem];
+				Player.S.pokemon_list[activeItem] = Player.S.pokemon_list[activeItem];
 				Player.S.pokemon_list[activeItem] = temp;
 				moving_pokemon = false;
+			}
+			else if(Input.GetKeyDown(KeyCode.A) && Items_Menu_2.S.usingItem){
+				Dialog.S.gameObject.SetActive(true);
+				Color noAlpha = GameObject.Find("DialogBackground").GetComponent<GUITexture>().color;
+				noAlpha.a = 255;
+				GameObject.Find("DialogBackground").GetComponent<GUITexture>().color = noAlpha;
+				if(Items_Menu.S.itemChosen == "POKeBALL" || Items_Menu.S.itemChosen == "Prof_Oak_Package"){
+							print("pokeball");
+					Dialog.S.ShowMessage("This isn't the time to use that");
+				}
+				else if(Items_Menu.S.itemChosen == "ANTIDOTE" && Player.S.pokemon_list[activeItem].pkmnName == "Bulbasaur"){ //change to poison
+					print("cured");
+					Player.S.itemsDictionary[Items_Menu.S.itemChosen]--;
+					if(Player.S.itemsDictionary[Items_Menu.S.itemChosen] == 0)
+						Player.S.itemsDictionary.Remove(Items_Menu.S.itemChosen);	//remove item if we have 0 of them
+					Dialog.S.ShowMessage(Player.S.pokemon_list[activeItem].pkmnName + " is cured");
+				}
+				else{
+					Dialog.S.ShowMessage("This will have no effect");
+					print("none");	
+				}
+				Items_Menu_2.S.usingItem = false;
+				Menu.S.items_menu_active = false;
+				Menu.S.menuPaused = false;
+				Menu.S.pokemon_menu_active = false;
+				Menu.S.gameObject.SetActive(true);
+				gameObject.SetActive(false);
+				
 			}
 			else if(Input.GetKeyDown(KeyCode.DownArrow) && !Pokemon_Menu_paused){
 				MoveDownMenu();
