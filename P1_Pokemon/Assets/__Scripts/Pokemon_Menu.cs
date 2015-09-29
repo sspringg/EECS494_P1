@@ -9,7 +9,7 @@ public class Pokemon_Menu : MonoBehaviour {
 	public List<GameObject> Poke_lists;
 	public List<GameObject>	Perm_Items; 
 	string key, value;
-	public bool pokemon_menu_2_active = false, Pokemon_Menu_paused = false;
+	public bool pokemon_menu_2_active = false, Pokemon_Menu_paused = false, moving_pokemon = false;
 	void Awake(){
 		S = this;
 	}
@@ -36,11 +36,17 @@ public class Pokemon_Menu : MonoBehaviour {
 		}
 		if (Menu.S.menuPaused && !pokemon_menu_2_active){
 			setPlayerItems();
-			if(Input.GetKeyDown(KeyCode.A)){
+			if(Input.GetKeyDown(KeyCode.A) && !moving_pokemon){
 				pokemon_menu_chosen = activeItem;
 				Pokemon_Menu_2.S.gameObject.SetActive(true);
 				pokemon_menu_2_active = true;
 				Pokemon_Menu_paused = true;
+			}
+			else if(Input.GetKeyDown(KeyCode.A) && moving_pokemon){
+				PokemonObject temp = Player.S.pokemon_list[pokemon_menu_chosen];
+				Player.S.pokemon_list[pokemon_menu_chosen] = Player.S.pokemon_list[activeItem];
+				Player.S.pokemon_list[activeItem] = temp;
+				moving_pokemon = false;
 			}
 			else if(Input.GetKeyDown(KeyCode.DownArrow) && !Pokemon_Menu_paused){
 				MoveDownMenu();

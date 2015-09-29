@@ -42,28 +42,31 @@ public class Pokemon_Menu_2 : MonoBehaviour {
 			if(Input.GetKeyDown(KeyCode.A)){
 				switch(activeItem){ // at 1:14:00
 				case 0:
-					print("poke stats");
 					Pokemon_Stats_Menu.S.gameObject.SetActive(true);
 					Pokemon_Menu_Stats_active = true;
 					Pokemon_Menu_2_paused = true;
 					Dialog.S.HideDialogBox();
 					break;
 				case 1:
-					print("swich");
+					Pokemon_Menu.S.Pokemon_Menu_paused = false;
+					Pokemon_Menu.S.pokemon_menu_2_active = false;
+					Pokemon_Menu.S.moving_pokemon = true;
+					Dialog.S.ShowMessage("Move POKeMON where");
+					gameObject.SetActive(false);
 					break;
 				case 2:
 					print("cancel");
+					gameObject.SetActive(false);
+					Pokemon_Menu.S.Pokemon_Menu_paused = false;
+					gameObject.SetActive(false);
 					break;	
 				}
-				gameObject.SetActive(false);
-				Pokemon_Menu.S.Pokemon_Menu_paused = false;
-				gameObject.SetActive(false);
 			}
 		}
-		else if(Input.GetKeyDown(KeyCode.DownArrow) && !Pokemon_Menu_2_paused){
+		if(Input.GetKeyDown(KeyCode.DownArrow) && !Pokemon_Menu_2_paused){
 			MoveDownMenu();
 		}
-		else if(Input.GetKeyDown(KeyCode.UpArrow) && !Pokemon_Menu_2_paused){
+		if(Input.GetKeyDown(KeyCode.UpArrow) && !Pokemon_Menu_2_paused){
 			MoveUpMenu();
 		}
 	}
