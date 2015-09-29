@@ -54,6 +54,12 @@ public class Menu : MonoBehaviour {
 						print("Pokemon menu");
 						pokemon_menu_active = true;
 						Pokemon_Menu.S.gameObject.SetActive(true);
+						Dialog.S.gameObject.SetActive(true);
+						Color noAlpha = GameObject.Find("DialogBackground").GetComponent<GUITexture>().color;
+						noAlpha.a = 255;
+						GameObject.Find("DialogBackground").GetComponent<GUITexture>().color = noAlpha;
+						Dialog.S.ShowMessage("Choose a POKeMON");
+						gameObject.SetActive(false);
 						menuPaused = true;
 						break;
 					case(int)menuItem.item:
@@ -78,6 +84,9 @@ public class Menu : MonoBehaviour {
 				}
 			}
 		}
+		if(Input.GetKeyDown(KeyCode.S)){
+			print("s down");
+		}
 		if(Input.GetKeyDown(KeyCode.DownArrow) && !menuPaused){
 			MoveDownMenu();
 		}
@@ -88,11 +97,6 @@ public class Menu : MonoBehaviour {
 			menuPaused = false;
 			items_menu_active = false;
 			Items_Menu.S.gameObject.SetActive(false);
-		}
-		else if(Input.GetKeyDown(KeyCode.S) && pokemon_menu_active){
-			menuPaused = false;
-			pokemon_menu_active = false;
-			Pokemon_Menu.S.gameObject.SetActive(false);
 		}
 	}
 	public void MoveDownMenu(){

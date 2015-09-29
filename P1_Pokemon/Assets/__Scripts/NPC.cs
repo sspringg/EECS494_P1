@@ -33,7 +33,6 @@ public class NPC : MonoBehaviour {
 		Color noAlpha = GameObject.Find("DialogBackground").GetComponent<GUITexture>().color;
 		noAlpha.a = 255;
 		GameObject.Find("DialogBackground").GetComponent<GUITexture>().color = noAlpha;
-		print(sentance);
 		Dialog.S.ShowMessage(sentance);
 	}
 	public void FacePlayer(Direction playerDir){

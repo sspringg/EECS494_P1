@@ -16,10 +16,12 @@ public class Main : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//not already talking and try to get menu and not already paused
 		if(!inDialog && Input.GetKeyDown(KeyCode.Return) && !paused){
 			Menu.S.gameObject.SetActive(true);
 			paused = true;
 		}
+		//exit menu when s is pushed
 		else if(paused && Menu.S.gameObject.activeSelf && Input.GetKeyDown(KeyCode.S) && !Items_Menu.S.gameObject.activeSelf 
 				&& !Pokemon_Menu.S.gameObject.activeSelf){
 			Menu.S.gameObject.SetActive(false);

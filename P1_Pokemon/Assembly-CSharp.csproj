@@ -68,6 +68,8 @@
      <Compile Include="Assets\__Scripts\PokemonSwitchMenu.cs" />
      <Compile Include="Assets\__Scripts\Pokemon_Choose.cs" />
      <Compile Include="Assets\__Scripts\Pokemon_Menu.cs" />
+     <Compile Include="Assets\__Scripts\Pokemon_Menu_2.cs" />
+     <Compile Include="Assets\__Scripts\Pokemon_Stats_Menu.cs" />
      <Compile Include="Assets\__Scripts\ShowMapOnCamera.cs" />
      <Compile Include="Assets\__Scripts\Tile.cs" />
      <Compile Include="Assets\__Scripts\TurnActionViewer.cs" />

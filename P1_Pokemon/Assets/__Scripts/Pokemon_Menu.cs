@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class Pokemon_Menu : MonoBehaviour {
-	public int activeItem;
+	public int activeItem, pokemon_menu_chosen;
 	public static Pokemon_Menu S;
 	public List<GameObject> Poke_lists;
 	public List<GameObject>	Perm_Items; 
 	string key, value;
+	public bool pokemon_menu_2_active = false, Pokemon_Menu_paused = false;
 	void Awake(){
 		S = this;
 	}
@@ -33,15 +34,36 @@ public class Pokemon_Menu : MonoBehaviour {
 			Menu.S.menuPaused = false;
 			Menu.S.pokemon_menu_active = false;	
 		}
-		if (Menu.S.menuPaused){
+		if (Menu.S.menuPaused && !pokemon_menu_2_active){
 			setPlayerItems();
-			if(Input.GetKeyDown(KeyCode.DownArrow)){
+			if(Input.GetKeyDown(KeyCode.A)){
+				pokemon_menu_chosen = activeItem;
+				Pokemon_Menu_2.S.gameObject.SetActive(true);
+				pokemon_menu_2_active = true;
+				Pokemon_Menu_paused = true;
+			}
+			else if(Input.GetKeyDown(KeyCode.DownArrow) && !Pokemon_Menu_paused){
 				MoveDownMenu();
 			}
-			else if (Input.GetKeyDown(KeyCode.UpArrow)){
+			else if (Input.GetKeyDown(KeyCode.UpArrow) && !Pokemon_Menu_paused){
 				MoveUpMenu();
 			}
 		}
+		if(Input.GetKeyDown(KeyCode.S) && pokemon_menu_2_active){
+			Pokemon_Menu_paused = false;
+			pokemon_menu_2_active = false;
+			Pokemon_Menu_2.S.gameObject.SetActive(false);
+		}
+		else if(Input.GetKeyDown(KeyCode.S) && !Pokemon_Menu_paused){
+			if(!pokemon_menu_2_active){
+				Menu.S.menuPaused = false;
+				Menu.S.pokemon_menu_active = false;
+				Menu.S.gameObject.SetActive(true);
+				Dialog.S.HideDialogBox();
+				gameObject.SetActive(false);
+			}
+		}
+		
 	}
 	private void MoveDownMenu(){
 		Poke_lists[activeItem].GetComponent<GUIText>().color = Color.black;
@@ -70,7 +92,7 @@ public class Pokemon_Menu : MonoBehaviour {
 			if(entry.pkmnName != "None")
 				Poke_lists[i].GetComponent<GUIText>().text = entry.pkmnName + " " + entry.curHp + "/" + entry.totHp + " LVL: " + entry.level;
 			else
-				Poke_lists[i].GetComponent<GUIText>().text = entry.pkmnName;
+				Poke_lists[i].GetComponent<GUIText>().text = "";
 			++i;
 		}
 	}
