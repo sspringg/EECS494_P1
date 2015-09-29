@@ -63,6 +63,9 @@ public class BottomMenu : MonoBehaviour {
 				break;
 			case(int)bMenuItem.run:
 				print("Run selected");
+				if (Player.S.enemyNo > 3)
+					;//initiate run and display message
+				else ;//display message that you can't run from a trainer
 				break;
 			}
 		}

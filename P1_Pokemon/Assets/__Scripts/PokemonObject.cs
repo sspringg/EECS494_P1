@@ -23,6 +23,12 @@ public enum pkmnType
 	none
 }
 
+public enum pkmnStatus
+{
+	OK,
+	FAINTED
+}
+
 public class PokemonObject{
 
 	public string pkmnName;
@@ -38,6 +44,7 @@ public class PokemonObject{
 	public int level;
 	public int exp;
 	public bool fought;
+	public pkmnStatus stat;
 
 	public AttackMove move1;
 	public AttackMove move2;
@@ -54,6 +61,7 @@ public class PokemonObject{
 		pkmn.level = 5;
 		pkmn.exp = 5 * 5 * 5;
 		pkmn.fought = false;
+		pkmn.stat = pkmnStatus.OK;
 		switch (inputName) {
 		case "Bulbasaur":
 			pkmn.pkmnName = "Bulbasaur";
@@ -168,6 +176,7 @@ public class PokemonObject{
 		else
 			curHp -= dmg;
 		if (curHp <= 0 && isPlayer) {
+			stat = pkmnStatus.FAINTED;
 			int i;
 			for (i = 0; i < 6; ++i) {
 				if (Player.S.pokemon_list [i].curHp > 0) {
@@ -187,6 +196,7 @@ public class PokemonObject{
 					Player.S.pokemon_list [j].move2.curPp = Player.S.pokemon_list [j].move2.totPp;
 					Player.S.pokemon_list [j].move3.curPp = Player.S.pokemon_list [j].move3.totPp;
 					Player.S.pokemon_list [j].move4.curPp = Player.S.pokemon_list [j].move4.totPp;
+					Player.S.pokemon_list [j].stat = pkmnStatus.OK;
 				}
 				BattleScreen.DestroyHelper ();
 			}
@@ -209,18 +219,17 @@ public class PokemonObject{
 						Player.S.pokemon_list[i].speed += 5;
 						print += Player.S.pokemon_list[i].pkmnName + ", ";
 					}
-					if (print != ""){
-						print += "have leveled up";
-						AttackMenu.S.gameObject.SetActive (false);
-						AttackMoveView.S.gameObject.SetActive (false);
-						LevelUpViewer.S.gameObject.SetActive (true);
-						LevelUpViewer.printMessage (print);
-						Debug.Log("Game should end");
-					}
-					else {
-						BattleScreen.DestroyHelper();
-					}
 				}
+			}
+			if (print != ""){
+				print += "have leveled up";
+				AttackMenu.S.gameObject.SetActive (false);
+				AttackMoveView.S.gameObject.SetActive (false);
+				LevelUpViewer.S.gameObject.SetActive (true);
+				LevelUpViewer.printMessage (print);
+			}
+			else {
+				BattleScreen.DestroyHelper();
 			}
 		}
 	}
