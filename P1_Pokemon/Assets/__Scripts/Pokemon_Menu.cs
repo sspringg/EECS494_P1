@@ -44,8 +44,8 @@ public class Pokemon_Menu : MonoBehaviour {
 			}
 			else if(Input.GetKeyDown(KeyCode.A) && moving_pokemon){
 				PokemonObject temp = Player.S.pokemon_list[activeItem];
-				Player.S.pokemon_list[activeItem] = Player.S.pokemon_list[activeItem];
-				Player.S.pokemon_list[activeItem] = temp;
+				Player.S.pokemon_list[activeItem] = Player.S.pokemon_list[pokemon_menu_chosen];
+				Player.S.pokemon_list[pokemon_menu_chosen] = temp;
 				moving_pokemon = false;
 			}
 			else if(Input.GetKeyDown(KeyCode.A) && Items_Menu_2.S.usingItem){
