@@ -34,13 +34,13 @@ public class Pokemon_Menu : MonoBehaviour {
 			Menu.S.menuPaused = false;
 			Menu.S.pokemon_menu_active = false;	
 		}
-		if (Menu.S.menuPaused && !pokemon_menu_2_active){
+		if (Menu.S.menuPaused && !pokemon_menu_2_active && Player.S.pokemon_list[0].pkmnName != "None"){
 			setPlayerItems();
 			if(Input.GetKeyDown(KeyCode.A) && !moving_pokemon && !Items_Menu_2.S.usingItem){
-				pokemon_menu_chosen = activeItem;
-				Pokemon_Menu_2.S.gameObject.SetActive(true);
-				pokemon_menu_2_active = true;
-				Pokemon_Menu_paused = true;
+					pokemon_menu_chosen = activeItem;
+					Pokemon_Menu_2.S.gameObject.SetActive(true);
+					pokemon_menu_2_active = true;
+					Pokemon_Menu_paused = true;
 			}
 			else if(Input.GetKeyDown(KeyCode.A) && moving_pokemon){
 				PokemonObject temp = Player.S.pokemon_list[activeItem];
@@ -57,11 +57,14 @@ public class Pokemon_Menu : MonoBehaviour {
 							print("pokeball");
 					Dialog.S.ShowMessage("This isn't the time to use that");
 				}
-				else if(Items_Menu.S.itemChosen == "ANTIDOTE" && Player.S.pokemon_list[activeItem].stat.ToString() == "poisned"){ //change to poison
+				else if(Items_Menu.S.itemChosen == "POTION"){ //change to poison
 					print("cured");
 					Player.S.itemsDictionary[Items_Menu.S.itemChosen]--;
 					if(Player.S.itemsDictionary[Items_Menu.S.itemChosen] == 0)
 						Player.S.itemsDictionary.Remove(Items_Menu.S.itemChosen);	//remove item if we have 0 of them
+					Player.S.pokemon_list[activeItem].curHp += 10;
+					if(Player.S.pokemon_list[activeItem].curHp > Player.S.pokemon_list[activeItem].totHp)
+						Player.S.pokemon_list[activeItem].curHp = Player.S.pokemon_list[activeItem].totHp;
 					Dialog.S.ShowMessage(Player.S.pokemon_list[activeItem].pkmnName + " is cured");
 				}
 				else{

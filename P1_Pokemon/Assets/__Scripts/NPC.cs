@@ -316,7 +316,7 @@ public class NPC : MonoBehaviour {
 					return "Pokeball, great choice! Good luck and be careful with it";
 				case 7:
 					Player.S.speakDictionary["Checkout_Front"] = 10;
-					return "That's the best Antidote money can buy!";
+					return "That's the best Potion money can buy!";
 				case 8:
 					Player.S.speakDictionary["Checkout_Front"] = 10;
 					return "This will get your POKeMON feeling better in no time!";

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Main : MonoBehaviour {
 
-
+//	var mainMusic : AudioClip;
 	static public Main S;
 	
 	public bool inDialog = false;
