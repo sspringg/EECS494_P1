@@ -31,6 +31,7 @@ public class BattleScreen : MonoBehaviour {
 			break;
 		case 4:
 			updatePokemon (false, PokemonObject.getPokemon ("Caterpie"));
+			break;
 		case 5:
 			updatePokemon (false, PokemonObject.getPokemon ("Pidgey"));
 			break;
