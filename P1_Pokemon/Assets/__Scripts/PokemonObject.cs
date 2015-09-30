@@ -517,7 +517,7 @@ public class PokemonObject{
 				TurnActionViewer.S.allDied = true;
 				Vector3 pos;
 				pos.x = 21;
-				pos.y = 102;
+				pos.y = 52;
 				pos.z = -0.01f;
 				Player.S.inScene0 = true;
 				Player.S.MoveThroughDoor (pos);
