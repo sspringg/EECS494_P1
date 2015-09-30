@@ -219,7 +219,7 @@ public class PokemonSwitchMenu : MonoBehaviour {
 	}
 
 	public static void UpdateSwitchMenu(){
-		GUIText mytext; //BattleScreen.playerPokemon.pkmnName;
+		GUIText mytext;
 		
 		mytext = GameObject.Find ("Pokemon1").GetComponent<GUIText> ();
 		mytext.text = Player.S.pokemon_list [0].pkmnName;

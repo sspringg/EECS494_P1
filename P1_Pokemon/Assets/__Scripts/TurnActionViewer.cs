@@ -9,6 +9,8 @@ public class TurnActionViewer : MonoBehaviour {
 	public int lim;
 	public string activeDied;
 	public bool allDied;
+	public bool run;
+	public bool pokecaught;
 
 	void Awake () {
 		S = this;
@@ -21,6 +23,8 @@ public class TurnActionViewer : MonoBehaviour {
 		lim = 0;
 		activeDied = "";
 		allDied = false;
+		run = false;
+		pokecaught = false;
 		endText = new string[8];
 		for (int i = 0; i < 8; ++i) {
 			endText [i] = "";
@@ -32,6 +36,7 @@ public class TurnActionViewer : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.A)) {
 			gameObject.SetActive (false);
 			if (BattleScreen.opponentPokemon.curHp <= 0) {
+				if (activeDied != "") endText[lim++] = activeDied + " has fainted.";
 				int x, y;
 				printText = "";
 				endText[lim++] = BattleScreen.opponentPokemon.pkmnName + " has fainted.";
@@ -72,6 +77,9 @@ public class TurnActionViewer : MonoBehaviour {
 				AttackMoveView.S.gameObject.SetActive (false);
 				FaintedViewer.S.gameObject.SetActive(true);
 				FaintedViewer.printMessage(activeDied + " has fainted, switching to next Pokemon.");
+			}
+			else if (run || pokecaught) {
+				BattleScreen.DestroyHelper();
 			}
 			else {
 				BottomMenu.S.gameObject.SetActive (true);

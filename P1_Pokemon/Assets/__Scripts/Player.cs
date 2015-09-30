@@ -85,6 +85,7 @@ public class Player : MonoBehaviour {
 		YS_pkmn.def -= 10;
 		wildPkmn1 = PokemonObject.getPokemon ("Caterpie");
 		wildPkmn2 = PokemonObject.getPokemon ("Caterpie");
+		itemsDictionary ["POKeBALL"] = 10;
 	}
 	
 	new public Rigidbody rigidbody{
