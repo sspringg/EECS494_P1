@@ -9,8 +9,10 @@ public class Wild_Pokemon : MonoBehaviour {
 	public UnityEngine.Random random = new UnityEngine.Random();
 	void OnTriggerEnter(Collider coll){
 		randomVal = UnityEngine.Random.Range(0, 100);
-		if(randomVal < chanceToFight)
-			Application.LoadLevelAdditive("_Scene_2");
+		if (randomVal < chanceToFight) {
+			Application.LoadLevelAdditive ("_Scene_2");
+			Player.S.enemyNo = UnityEngine.Random.Range(4, 6);
+		}
 	}
 	void FixedUpdate(){
 			randomVal = UnityEngine.Random.Range(0, 100);

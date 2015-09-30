@@ -7,6 +7,8 @@ public class TurnActionViewer : MonoBehaviour {
 	public string[] endText;
 	public string printText;
 	public int lim;
+	public string activeDied;
+	public bool allDied;
 
 	void Awake () {
 		S = this;
@@ -17,6 +19,8 @@ public class TurnActionViewer : MonoBehaviour {
 		gameObject.SetActive (false);
 		printText = "";
 		lim = 0;
+		activeDied = "";
+		allDied = false;
 		endText = new string[8];
 		for (int i = 0; i < 8; ++i) {
 			endText [i] = "";
@@ -56,6 +60,18 @@ public class TurnActionViewer : MonoBehaviour {
 				AttackMenu.S.gameObject.SetActive (false);
 				AttackMoveView.S.gameObject.SetActive (false);
 				EndTextViewer.S.gameObject.SetActive(true);
+			}
+			else if (allDied){
+				AttackMenu.S.gameObject.SetActive (false);
+				AttackMoveView.S.gameObject.SetActive (false);
+				FaintedViewer.S.gameObject.SetActive(true);
+				FaintedViewer.printMessage("All your Pokemon have fainted,\n you will be transfered to the nearest Pokemon center.");
+			}
+			else if (activeDied != ""){
+				AttackMenu.S.gameObject.SetActive (false);
+				AttackMoveView.S.gameObject.SetActive (false);
+				FaintedViewer.S.gameObject.SetActive(true);
+				FaintedViewer.printMessage(activeDied + " has fainted, switching to next Pokemon.");
 			}
 			else {
 				BottomMenu.S.gameObject.SetActive (true);

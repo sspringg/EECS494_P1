@@ -178,6 +178,7 @@ public class PokemonObject{
 		if (curHp <= 0 && isPlayer) {
 			stat = pkmnStatus.FAINTED;
 			int i;
+			TurnActionViewer.S.activeDied = pkmnName;
 			for (i = 0; i < 6; ++i) {
 				if (Player.S.pokemon_list [i].curHp > 0) {
 					BattleScreen.updatePokemon (true, Player.S.pokemon_list [i]);
@@ -185,6 +186,7 @@ public class PokemonObject{
 				}
 			}
 			if (i == 6) {
+				TurnActionViewer.S.allDied = true;
 				Vector3 pos;
 				pos.x = 21;
 				pos.y = 102;
@@ -198,7 +200,6 @@ public class PokemonObject{
 					Player.S.pokemon_list [j].move4.curPp = Player.S.pokemon_list [j].move4.totPp;
 					Player.S.pokemon_list [j].stat = pkmnStatus.OK;
 				}
-				BattleScreen.DestroyHelper ();
 			}
 		}
 	}
