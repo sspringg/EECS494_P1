@@ -108,6 +108,7 @@ public class NPC : MonoBehaviour {
 					Player.S.sprend.sprite = Player.S.upSprite;
 				else if(Player.S.transform.position.y > gameObject.transform.position.y)
 					Player.S.sprend.sprite = Player.S.downSprite;
+				Player.S.inScene0 = false;
 				Application.LoadLevelAdditive("_Scene_2");
 			}
 		}

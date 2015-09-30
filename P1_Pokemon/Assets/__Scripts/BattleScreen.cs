@@ -71,6 +71,7 @@ public class BattleScreen : MonoBehaviour {
 	}
 
 	public static void DestroyHelper(){
+		Player.S.inScene0 = true;
 		Destroy (GameObject.Find ("BattleScene"));
 	}
 }

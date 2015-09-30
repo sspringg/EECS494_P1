@@ -57,7 +57,7 @@ public class Pokemon_Menu : MonoBehaviour {
 							print("pokeball");
 					Dialog.S.ShowMessage("This isn't the time to use that");
 				}
-				else if(Items_Menu.S.itemChosen == "ANTIDOTE" && Player.S.pokemon_list[activeItem].pkmnName == "Bulbasaur"){ //change to poison
+				else if(Items_Menu.S.itemChosen == "ANTIDOTE" && Player.S.pokemon_list[activeItem].stat.ToString() == "poisned"){ //change to poison
 					print("cured");
 					Player.S.itemsDictionary[Items_Menu.S.itemChosen]--;
 					if(Player.S.itemsDictionary[Items_Menu.S.itemChosen] == 0)
