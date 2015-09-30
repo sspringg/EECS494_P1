@@ -488,6 +488,7 @@ public class PokemonObject{
 	public void takeHit(AttackMove atkMove, PokemonObject attacker, bool isPlayer){
 		if (atkMove.moveName == "None")
 			return;
+		TurnActionViewer.S.diffmod = 1;
 		double modifier1 = modifierTable[type1][atkMove.type];
 		double modifier2 = modifierTable[type2][atkMove.type];
 		double totmod = modifier1 * modifier2;
@@ -518,6 +519,7 @@ public class PokemonObject{
 				pos.x = 21;
 				pos.y = 102;
 				pos.z = -0.01f;
+				Player.S.inScene0 = true;
 				Player.S.MoveThroughDoor (pos);
 				for (int j = 0; j < 6; ++j) {
 					Player.S.pokemon_list [j].curHp = Player.S.pokemon_list [j].totHp;

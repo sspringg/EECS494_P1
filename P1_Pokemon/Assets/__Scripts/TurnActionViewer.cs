@@ -72,7 +72,7 @@ public class TurnActionViewer : MonoBehaviour {
 				AttackMenu.S.gameObject.SetActive (false);
 				AttackMoveView.S.gameObject.SetActive (false);
 				FaintedViewer.S.gameObject.SetActive(true);
-				FaintedViewer.printMessage("All your Pokemon have fainted,\n you will be transfered to the nearest Pokemon center.");
+				FaintedViewer.printMessage("All your Pokemon have fainted,\nyou will be transfered to the \nnearest Pokemon center.");
 			}
 			else if (activeDied != ""){
 				AttackMenu.S.gameObject.SetActive (false);
