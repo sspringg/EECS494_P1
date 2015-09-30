@@ -30,7 +30,7 @@ public class BattleScreen : MonoBehaviour {
 			updatePokemon (false, Player.S.YS_pkmn);
 			break;
 		default:
-			updatePokemon (false, PokemonObject.getPokemon ("Charmander"));
+			updatePokemon (false, PokemonObject.getPokemon ("Caterpie"));
 			break;
 		}
 	}
@@ -73,5 +73,6 @@ public class BattleScreen : MonoBehaviour {
 	public static void DestroyHelper(){
 		Player.S.inScene0 = true;
 		Destroy (GameObject.Find ("BattleScene"));
+		Player.S.enemyNo = 0;
 	}
 }

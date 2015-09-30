@@ -64,6 +64,7 @@ public class Player : MonoBehaviour {
 	
 	void Start(){
 		sprend = gameObject.GetComponent<SpriteRenderer>();
+		PokemonObject.start ();
 		pokemon_list = new PokemonObject[6];
 		pokemon_list [0] = PokemonObject.getPokemon ("None");
 		pokemon_list [1] = PokemonObject.getPokemon ("None");
@@ -86,6 +87,7 @@ public class Player : MonoBehaviour {
 		YS_pkmn.def -= 10;
 		wildPkmn1 = PokemonObject.getPokemon ("Caterpie");
 		wildPkmn2 = PokemonObject.getPokemon ("Caterpie");
+		itemsDictionary ["POKeBALL"] = 10;
 	}
 	
 	new public Rigidbody rigidbody{
