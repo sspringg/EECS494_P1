@@ -435,14 +435,31 @@ public class PokemonObject{
 			pkmn.pkmnName = "Caterpie";
 			pkmn.type1 = pkmnType.bug;
 			pkmn.type2 = pkmnType.none;
-			pkmn.totHp = 45;
-			pkmn.curHp = 45;
+			pkmn.totHp = 30;
+			pkmn.curHp = 30;
+			pkmn.atk = 20;
+			pkmn.def = 25;
+			pkmn.spAtk = 20;
+			pkmn.spDef = 20;
+			pkmn.speed = 35;
+			pkmn.move1 = AttackMove.getMove("Bug Bite");
+			pkmn.move2 = AttackMove.getMove("Tackle");
+			pkmn.move3 = AttackMove.getMove("None");
+			pkmn.move4 = AttackMove.getMove("None");
+			pkmn.level = 3;
+			break;
+		case "Pidgey":
+			pkmn.pkmnName = "Pidgey";
+			pkmn.type1 = pkmnType.normal;
+			pkmn.type2 = pkmnType.flying;
+			pkmn.totHp = 35;
+			pkmn.curHp = 35;
 			pkmn.atk = 30;
 			pkmn.def = 35;
 			pkmn.spAtk = 20;
 			pkmn.spDef = 20;
 			pkmn.speed = 45;
-			pkmn.move1 = AttackMove.getMove("Bug Bite");
+			pkmn.move1 = AttackMove.getMove("Gust");
 			pkmn.move2 = AttackMove.getMove("Tackle");
 			pkmn.move3 = AttackMove.getMove("None");
 			pkmn.move4 = AttackMove.getMove("None");
@@ -471,6 +488,7 @@ public class PokemonObject{
 	public void takeHit(AttackMove atkMove, PokemonObject attacker, bool isPlayer){
 		if (atkMove.moveName == "None")
 			return;
+		TurnActionViewer.S.diffmod = 1;
 		double modifier1 = modifierTable[type1][atkMove.type];
 		double modifier2 = modifierTable[type2][atkMove.type];
 		double totmod = modifier1 * modifier2;
@@ -501,6 +519,7 @@ public class PokemonObject{
 				pos.x = 21;
 				pos.y = 102;
 				pos.z = -0.01f;
+				Player.S.inScene0 = true;
 				Player.S.MoveThroughDoor (pos);
 				for (int j = 0; j < 6; ++j) {
 					Player.S.pokemon_list [j].curHp = Player.S.pokemon_list [j].totHp;
